@@ -1,767 +1,696 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TeraPlay - Free TeraBox Video Player Online</title>
-  <meta name="description" content="Play TeraBox videos online instantly. Just paste your TeraBox link and watch without downloading any app. Fast, free, and works on all devices."/>
-  <meta name="keywords" content="terabox video player, terabox online player, play terabox video, terabox link player, terabox stream online, watch terabox video without app"/>
-  <meta property="og:title" content="TeraPlay - Free TeraBox Video Player Online"/>
-  <meta property="og:description" content="Play TeraBox videos online instantly. No app needed. Just paste and play."/>
+  <title>VidLinkOpen – Play Any Video Link Online Free | TeraBox, MDisk, PDisk, Drive</title>
+  <meta name="description" content="Play any video link online instantly. Supports TeraBox, MDisk, PDisk, Google Drive, Pixeldrain, Streamtape, Gofile, YouTube and direct video links. No app, no login, 100% free."/>
+  <meta name="keywords" content="terabox video player, mdisk player, pdisk player, video link opener, play terabox online, mdisk video player, google drive video player, pixeldrain player, streamtape player, gofile player, online video player"/>
+  <meta name="robots" content="index, follow"/>
+  <meta property="og:title" content="VidLinkOpen – Play Any Video Link Instantly"/>
+  <meta property="og:description" content="One tool to play all video links. TeraBox, MDisk, PDisk, Google Drive, Pixeldrain and more."/>
   <meta property="og:type" content="website"/>
-  <link rel="canonical" href="https://teraplay.in"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <link rel="canonical" href="https://vidlinkopen.com"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #080b12;
-      --surface: #0f1420;
-      --card: #141926;
-      --border: #1e2535;
-      --accent: #3b82f6;
-      --accent2: #06b6d4;
-      --green: #10b981;
-      --text: #e2e8f0;
-      --muted: #64748b;
-      --danger: #ef4444;
+      --bg:#05070f;--bg2:#080c18;--surface:#0c1120;--card:#101626;--card2:#141c30;
+      --border:#1a2440;--border2:#1f2d50;--primary:#4f8ef7;--secondary:#f7504f;
+      --accent:#50f7b1;--text:#e2eaff;--text2:#8899bb;--text3:#4a5a80;
+      --mono:'JetBrains Mono',monospace;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Space Grotesk', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden}
+    .bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .bg-canvas::before{content:'';position:absolute;width:800px;height:800px;top:-200px;left:-200px;background:radial-gradient(circle,rgba(79,142,247,.07) 0%,transparent 70%);animation:orb1 12s ease-in-out infinite alternate}
+    .bg-canvas::after{content:'';position:absolute;width:600px;height:600px;bottom:-100px;right:-100px;background:radial-gradient(circle,rgba(80,247,177,.05) 0%,transparent 70%);animation:orb2 15s ease-in-out infinite alternate}
+    @keyframes orb1{to{transform:translate(100px,80px) scale(1.2)}}
+    @keyframes orb2{to{transform:translate(-80px,-60px) scale(1.3)}}
+    .grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(79,142,247,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(79,142,247,.025) 1px,transparent 1px);background-size:40px 40px}
+    nav{position:sticky;top:0;z-index:200;background:rgba(5,7,15,.9);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-size:1.4rem;font-weight:800;letter-spacing:-.5px;display:flex;align-items:center}
+    .logo .vid{color:var(--primary)}.logo .link{color:var(--text)}.logo .open{color:var(--accent)}
+    .nav-right{display:flex;align-items:center;gap:12px}
+    .nav-pill{background:rgba(80,247,177,.08);border:1px solid rgba(80,247,177,.2);color:var(--accent);font-size:.75rem;font-weight:600;padding:5px 14px;border-radius:100px}
+    .live-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite;display:inline-block;margin-right:6px}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+    .nav-count{font-size:.75rem;color:var(--text2);font-weight:500}
+    .hero{position:relative;z-index:1;text-align:center;padding:72px 24px 56px}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(79,142,247,.08);border:1px solid rgba(79,142,247,.2);color:var(--primary);font-size:.8rem;font-weight:600;padding:7px 18px;border-radius:100px;margin-bottom:32px;animation:fsd .5s ease both}
+    h1{font-size:clamp(2rem,5.5vw,3.8rem);font-weight:900;line-height:1.08;letter-spacing:-2px;margin-bottom:20px;animation:fsd .5s .1s ease both}
+    h1 .grad{background:linear-gradient(135deg,var(--primary) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:1.05rem;color:var(--text2);max-width:540px;margin:0 auto 48px;line-height:1.7;font-weight:400;animation:fsd .5s .2s ease both}
+    @keyframes fsd{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fsu{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    .platform-tabs{position:relative;z-index:1;display:flex;justify-content:center;flex-wrap:wrap;gap:8px;padding:0 20px;margin-bottom:24px;animation:fsd .5s .25s ease both}
+    .ptab{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:7px 14px;font-size:.78rem;font-weight:600;color:var(--text2);cursor:pointer;transition:all .2s;user-select:none}
+    .ptab:hover,.ptab.active{border-color:var(--primary);color:var(--primary);background:rgba(79,142,247,.08)}
+    .input-section{position:relative;z-index:1;max-width:780px;margin:0 auto 80px;padding:0 20px;animation:fsu .6s .3s ease both}
+    .main-card{background:var(--card);border:1px solid var(--border);border-radius:24px;overflow:hidden;box-shadow:0 0 0 1px rgba(79,142,247,.05),0 32px 80px rgba(0,0,0,.6);transition:border-color .3s,box-shadow .3s}
+    .main-card:focus-within{border-color:rgba(79,142,247,.35);box-shadow:0 0 0 1px rgba(79,142,247,.1),0 32px 80px rgba(0,0,0,.6),0 0 80px rgba(79,142,247,.08)}
+    .card-top{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    .card-title{font-size:.8rem;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:1.5px}
+    .det-badge{display:none;background:rgba(80,247,177,.1);border:1px solid rgba(80,247,177,.25);color:var(--accent);font-size:.72rem;font-weight:700;padding:3px 12px;border-radius:100px;text-transform:uppercase;letter-spacing:.5px}
+    .det-badge.show{display:inline-block}
+    .card-body{padding:20px 24px}
+    .input-wrapper{display:flex;gap:10px}
+    .url-input{flex:1;background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:16px 20px;color:var(--text);font-family:var(--mono);font-size:.85rem;outline:none;transition:border-color .2s,box-shadow .2s;min-width:0}
+    .url-input::placeholder{color:var(--text3);font-family:'Outfit',sans-serif;font-size:.88rem}
+    .url-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(79,142,247,.12)}
+    .open-btn{background:linear-gradient(135deg,var(--primary),#3a7aef);color:#fff;border:none;border-radius:14px;padding:16px 28px;font-family:'Outfit',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px;transition:all .2s;box-shadow:0 4px 20px rgba(79,142,247,.3)}
+    .open-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(79,142,247,.5)}
+    .open-btn:active{transform:translateY(0)}
+    .open-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+    .msg-bar{display:none;margin-top:14px;padding:13px 18px;border-radius:12px;font-size:.88rem;font-weight:500;align-items:flex-start;gap:10px;line-height:1.6}
+    .msg-bar.show{display:flex}
+    .msg-bar.error{background:rgba(247,80,79,.1);border:1px solid rgba(247,80,79,.3);color:#f7504f}
+    .msg-bar.info{background:rgba(79,142,247,.08);border:1px solid rgba(79,142,247,.2);color:var(--primary)}
+    .msg-bar.success{background:rgba(80,247,177,.08);border:1px solid rgba(80,247,177,.2);color:var(--accent)}
+    .msg-bar.warning{background:rgba(247,180,79,.08);border:1px solid rgba(247,180,79,.2);color:#f7b44f}
+    .player-wrap{display:none;margin-top:16px;border-radius:16px;overflow:hidden;background:#000;border:1px solid var(--border);position:relative;min-height:200px}
+    .player-wrap.show{display:block}
+    .player-wrap video{width:100%;max-height:500px;display:block;background:#000}
+    .player-wrap iframe{width:100%;height:440px;border:none;display:block}
+    .loading-box{display:none;position:absolute;inset:0;background:rgba(5,7,15,.95);flex-direction:column;align-items:center;justify-content:center;gap:16px;border-radius:16px;min-height:200px}
+    .loading-box.show{display:flex}
+    .loader-ring{width:48px;height:48px;border:3px solid var(--border2);border-top-color:var(--primary);border-radius:50%;animation:spin .9s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .loader-text{font-size:.88rem;color:var(--text2);font-weight:500}
+    .loader-sub{font-size:.75rem;color:var(--text3);font-family:var(--mono)}
+    .action-row{display:none;gap:10px;margin-top:14px;flex-wrap:wrap}
+    .action-row.show{display:flex}
+    .action-btn{flex:1;min-width:140px;padding:12px 18px;border-radius:12px;font-family:'Outfit',sans-serif;font-weight:600;font-size:.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;text-decoration:none}
+    .action-btn.download{background:rgba(80,247,177,.08);border:1px solid rgba(80,247,177,.25);color:var(--accent)}
+    .action-btn.download:hover{background:rgba(80,247,177,.15);transform:translateY(-1px)}
+    .action-btn.copy{background:rgba(79,142,247,.08);border:1px solid rgba(79,142,247,.25);color:var(--primary)}
+    .action-btn.copy:hover{background:rgba(79,142,247,.15);transform:translateY(-1px)}
+    .action-btn.clear{background:rgba(247,80,79,.06);border:1px solid rgba(247,80,79,.2);color:#f7504f;flex:0;padding:12px 16px}
+    .action-btn.clear:hover{background:rgba(247,80,79,.12)}
+    .stats-row{position:relative;z-index:1;display:flex;justify-content:center;margin-bottom:100px;background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .stat-item{flex:1;max-width:200px;padding:36px 24px;text-align:center;position:relative}
+    .stat-item:not(:last-child)::after{content:'';position:absolute;right:0;top:25%;bottom:25%;width:1px;background:var(--border)}
+    .stat-n{font-size:2rem;font-weight:900;letter-spacing:-1px;line-height:1;margin-bottom:8px}
+    .stat-n.blue{color:var(--primary)}.stat-n.green{color:var(--accent)}
+    .stat-l{font-size:.78rem;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:.8px}
+    .section{position:relative;z-index:1;max-width:1040px;margin:0 auto 100px;padding:0 24px}
+    .section-head{text-align:center;margin-bottom:52px}
+    .section-eyebrow{font-size:.75rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
+    .section-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.5px;margin-bottom:12px}
+    .section-sub{color:var(--text2);font-size:1rem;font-weight:400;line-height:1.6}
+    .platforms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+    .platform-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px 20px;transition:all .25s;cursor:default;position:relative;overflow:hidden}
+    .platform-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.4)}
+    .platform-icon{font-size:2rem;margin-bottom:14px;display:block}
+    .platform-name{font-weight:700;font-size:.95rem;margin-bottom:6px}
+    .platform-desc{font-size:.8rem;color:var(--text2);line-height:1.5;font-weight:400}
+    .platform-badge{display:inline-block;margin-top:10px;font-size:.68rem;font-weight:700;padding:2px 10px;border-radius:100px;text-transform:uppercase;letter-spacing:.5px}
+    .badge-hot{background:rgba(247,80,79,.12);color:#f7504f;border:1px solid rgba(247,80,79,.25)}
+    .badge-new{background:rgba(80,247,177,.1);color:var(--accent);border:1px solid rgba(80,247,177,.25)}
+    .badge-pro{background:rgba(79,142,247,.1);color:var(--primary);border:1px solid rgba(79,142,247,.25)}
+    .features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+    .feature-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px;transition:all .25s;position:relative;overflow:hidden}
+    .ftop{position:absolute;top:0;left:0;right:0;height:2px;transform:scaleX(0);transform-origin:left;transition:transform .3s}
+    .feature-card:hover .ftop{transform:scaleX(1)}
+    .feature-card:hover{border-color:var(--border2);transform:translateY(-3px)}
+    .f1 .ftop{background:linear-gradient(90deg,var(--primary),var(--accent))}
+    .f2 .ftop{background:linear-gradient(90deg,var(--accent),#50d4f7)}
+    .f3 .ftop{background:linear-gradient(90deg,#f7504f,#f7b44f)}
+    .f4 .ftop{background:linear-gradient(90deg,var(--primary),#9050f7)}
+    .feat-icon{width:44px;height:44px;border-radius:12px;background:var(--surface);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:18px}
+    .feat-title{font-weight:700;font-size:1rem;margin-bottom:8px;letter-spacing:-.2px}
+    .feat-desc{color:var(--text2);font-size:.88rem;line-height:1.65;font-weight:400}
+    .steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;position:relative}
+    .step-item{text-align:center;padding:0 24px}
+    .step-circle{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,rgba(79,142,247,.15),rgba(80,247,177,.1));border:1px solid rgba(79,142,247,.3);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.3rem;color:var(--primary);margin:0 auto 20px}
+    .step-title{font-weight:700;font-size:.95rem;margin-bottom:8px}
+    .step-desc{color:var(--text2);font-size:.85rem;line-height:1.6;font-weight:400}
+    .faq-list{display:flex;flex-direction:column;gap:0}
+    .faq-item{border-bottom:1px solid var(--border)}
+    .faq-btn{width:100%;background:none;border:none;padding:22px 0;color:var(--text);font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:600;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;transition:color .2s}
+    .faq-btn:hover{color:var(--primary)}
+    .faq-chevron{width:28px;height:28px;border-radius:8px;background:var(--card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;font-size:.9rem;color:var(--text2)}
+    .faq-item.open .faq-chevron{background:rgba(79,142,247,.1);border-color:var(--primary);color:var(--primary);transform:rotate(180deg)}
+    .faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease}
+    .faq-item.open .faq-answer{max-height:300px}
+    .faq-answer p{padding-bottom:22px;color:var(--text2);font-size:.9rem;line-height:1.75;font-weight:400}
+    .seo-content{position:relative;z-index:1;max-width:860px;margin:0 auto 100px;padding:0 24px}
+    .seo-content h2{font-size:1.5rem;font-weight:800;margin-bottom:14px;letter-spacing:-.3px;margin-top:32px}
+    .seo-content h2:first-child{margin-top:0}
+    .seo-content p{color:var(--text2);font-size:.93rem;line-height:1.8;margin-bottom:14px;font-weight:400}
+    footer{position:relative;z-index:1;background:var(--bg2);border-top:1px solid var(--border);padding:52px 24px 36px}
+    .footer-inner{max-width:1040px;margin:0 auto}
+    .footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap;margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid var(--border)}
+    .footer-brand p{color:var(--text2);font-size:.85rem;line-height:1.6;max-width:300px;font-weight:400;margin-top:12px}
+    .footer-links-group h4{font-size:.75rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px}
+    .footer-links-group a{display:block;color:var(--text2);text-decoration:none;font-size:.88rem;font-weight:400;margin-bottom:10px;transition:color .2s}
+    .footer-links-group a:hover{color:var(--primary)}
+    .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+    .footer-copy,.footer-disc{color:var(--text3);font-size:.8rem}
+    @media(max-width:640px){
+      nav{padding:0 16px}
+      .nav-count{display:none}
+      .input-wrapper{flex-direction:column}
+      .open-btn{justify-content:center}
+      .stats-row{flex-wrap:wrap}
+      .stat-item{min-width:45%}
+      .stat-item::after{display:none}
+      .footer-top{flex-direction:column}
+      .footer-bottom{flex-direction:column;text-align:center}
     }
-    body::before {
-      content: '';
-      position: fixed;
-      top: -50%; left: -50%;
-      width: 200%; height: 200%;
-      background: radial-gradient(ellipse at 20% 20%, rgba(59,130,246,0.07) 0%, transparent 50%),
-                  radial-gradient(ellipse at 80% 80%, rgba(6,182,212,0.05) 0%, transparent 50%);
-      animation: bgPulse 8s ease-in-out infinite alternate;
-      pointer-events: none;
-      z-index: 0;
-    }
-    @keyframes bgPulse {
-      0% { transform: translate(0,0); }
-      100% { transform: translate(2%,2%); }
-    }
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(8,11,18,0.9);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
-    .logo {
-      font-family: 'Syne', sans-serif;
-      font-size: 22px;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .nav-links { display: flex; gap: 8px; }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 14px;
-      padding: 6px 14px;
-      border-radius: 8px;
-      transition: all 0.2s;
-    }
-    .nav-links a:hover { color: var(--text); background: var(--card); }
-    .hero {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 120px 20px 60px;
-      text-align: center;
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(59,130,246,0.1);
-      border: 1px solid rgba(59,130,246,0.3);
-      color: var(--accent);
-      font-size: 12px;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 100px;
-      margin-bottom: 24px;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      animation: fadeUp 0.6s ease both;
-    }
-    .badge::before {
-      content: '';
-      width: 6px; height: 6px;
-      background: var(--green);
-      border-radius: 50%;
-      animation: blink 1.5s infinite;
-    }
-    @keyframes blink {
-      0%,100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-    h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(36px, 6vw, 72px);
-      font-weight: 800;
-      line-height: 1.05;
-      margin-bottom: 20px;
-      animation: fadeUp 0.6s 0.1s ease both;
-    }
-    h1 .highlight {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .subtitle {
-      color: var(--muted);
-      font-size: clamp(15px, 2vw, 18px);
-      max-width: 520px;
-      line-height: 1.7;
-      margin-bottom: 48px;
-      animation: fadeUp 0.6s 0.2s ease both;
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .player-card {
-      width: 100%;
-      max-width: 720px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 32px;
-      animation: fadeUp 0.6s 0.3s ease both;
-      box-shadow: 0 0 60px rgba(59,130,246,0.08);
-    }
-    .input-group {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    .link-input {
-      flex: 1;
-      background: var(--surface);
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 18px;
-      color: var(--text);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 15px;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .link-input::placeholder { color: var(--muted); }
-    .link-input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
-    }
-    .play-btn {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border: none;
-      border-radius: 12px;
-      padding: 14px 24px;
-      color: white;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 15px;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .play-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(59,130,246,0.4); }
-    .play-btn:active { transform: translateY(0); }
-    .play-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-    .platforms {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-    }
-    .platforms span { font-size: 12px; color: var(--muted); }
-    .platform-tag {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 12px;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-weight: 500;
-    }
-    .status-bar {
-      display: none;
-      align-items: center;
-      gap: 10px;
-      background: rgba(59,130,246,0.08);
-      border: 1px solid rgba(59,130,246,0.2);
-      border-radius: 10px;
-      padding: 12px 16px;
-      margin-bottom: 20px;
-      font-size: 14px;
-      color: var(--accent);
-    }
-    .status-bar.error {
-      background: rgba(239,68,68,0.08);
-      border-color: rgba(239,68,68,0.2);
-      color: var(--danger);
-    }
-    .status-bar.success {
-      background: rgba(16,185,129,0.08);
-      border-color: rgba(16,185,129,0.2);
-      color: var(--green);
-    }
-    .spinner {
-      width: 16px; height: 16px;
-      border: 2px solid rgba(59,130,246,0.3);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      flex-shrink: 0;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .video-container {
-      display: none;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #000;
-      aspect-ratio: 16/9;
-      position: relative;
-    }
-    .video-container video,
-    .video-container iframe {
-      width: 100%; height: 100%;
-      border: none; display: block;
-    }
-    .action-bar {
-      display: none;
-      gap: 10px;
-      margin-top: 16px;
-      flex-wrap: wrap;
-    }
-    .action-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 10px 18px;
-      border-radius: 10px;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-decoration: none;
-    }
-    .btn-download { background: var(--green); color: white; border: none; }
-    .btn-download:hover { filter: brightness(1.1); }
-    .btn-copy {
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-copy:hover { border-color: var(--accent); color: var(--accent); }
-    .section {
-      position: relative;
-      z-index: 1;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 80px 20px;
-    }
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 32px;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-    .section-sub { color: var(--muted); margin-bottom: 48px; font-size: 15px; }
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-    .step-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .step-card:hover { border-color: rgba(59,130,246,0.4); transform: translateY(-4px); }
-    .step-num {
-      width: 40px; height: 40px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 18px;
-      margin-bottom: 16px;
-    }
-    .step-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
-    .step-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-    }
-    .feature-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 22px 24px;
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      transition: border-color 0.2s;
-    }
-    .feature-card:hover { border-color: rgba(59,130,246,0.3); }
-    .feature-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
-    .feature-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
-    .feature-card p { font-size: 13px; color: var(--muted); line-height: 1.5; }
-    .faq-list { display: flex; flex-direction: column; gap: 12px; }
-    .faq-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .faq-q {
-      padding: 18px 20px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 500;
-      font-size: 15px;
-      transition: color 0.2s;
-    }
-    .faq-q:hover { color: var(--accent); }
-    .faq-arrow { font-size: 18px; transition: transform 0.3s; color: var(--muted); flex-shrink: 0; }
-    .faq-item.open .faq-arrow { transform: rotate(180deg); }
-    .faq-a {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease, padding 0.3s;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.7;
-      padding: 0 20px;
-    }
-    .faq-item.open .faq-a { max-height: 200px; padding: 0 20px 18px; }
-    .divider { border: none; border-top: 1px solid var(--border); margin: 0 20px; }
-    footer {
-      position: relative;
-      z-index: 1;
-      border-top: 1px solid var(--border);
-      padding: 32px 20px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--accent); }
-    .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
-    @media (max-width: 600px) {
-      .input-group { flex-direction: column; }
-      .play-btn { width: 100%; justify-content: center; }
-      .nav-links { display: none; }
-      .player-card { padding: 20px; }
-    }
-    .toast {
-      position: fixed;
-      bottom: 24px; right: 24px;
-      background: var(--green);
-      color: white;
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 14px;
-      z-index: 999;
-      transform: translateY(80px);
-      opacity: 0;
-      transition: all 0.3s;
-    }
-    .toast.show { transform: translateY(0); opacity: 1; }
   </style>
 </head>
 <body>
+<div class="bg-canvas"></div>
+<div class="grid-bg"></div>
 
 <nav>
-  <div class="logo">TeraPlay</div>
-  <div class="nav-links">
-    <a href="#how">How It Works</a>
-    <a href="#features">Features</a>
-    <a href="#faq">FAQ</a>
+  <div class="logo"><span class="vid">Vid</span><span class="link">Link</span><span class="open">Open</span></div>
+  <div class="nav-right">
+    <span class="live-dot"></span>
+    <span class="nav-count">9 Platforms Supported</span>
+    <div class="nav-pill">100% Free</div>
   </div>
 </nav>
 
 <section class="hero">
-  <div class="badge">Free Online Player — No App Needed</div>
-  <h1>Play <span class="highlight">TeraBox Videos</span><br/>Instantly Online</h1>
-  <p class="subtitle">Paste any TeraBox link and watch your video directly in the browser. No app, no login, no waiting.</p>
+  <div class="hero-badge">🌍 Works Worldwide &nbsp;·&nbsp; No Login Required</div>
+  <h1>Open Any Video Link<br/><span class="grad">Instantly In Your Browser</span></h1>
+  <p class="hero-sub">TeraBox, MDisk, PDisk, Google Drive, Pixeldrain, Streamtape, Gofile, YouTube — paste any link and watch instantly. Free forever.</p>
+</section>
 
-  <div class="player-card">
-    <div class="platforms">
-      <span>Supports:</span>
-      <span class="platform-tag">📦 TeraBox</span>
-      <span class="platform-tag">🎬 Direct MP4</span>
-      <span class="platform-tag">☁️ Google Drive</span>
-      <span class="platform-tag">🔗 Direct Links</span>
+<div class="platform-tabs">
+  <div class="ptab" onclick="tabClick(this,'terabox')">📦 TeraBox</div>
+  <div class="ptab" onclick="tabClick(this,'mdisk')">💿 MDisk</div>
+  <div class="ptab" onclick="tabClick(this,'pdisk')">💾 PDisk</div>
+  <div class="ptab" onclick="tabClick(this,'gdrive')">🗂️ Google Drive</div>
+  <div class="ptab" onclick="tabClick(this,'pixeldrain')">⚡ Pixeldrain</div>
+  <div class="ptab" onclick="tabClick(this,'streamtape')">🎞️ Streamtape</div>
+  <div class="ptab" onclick="tabClick(this,'gofile')">📁 Gofile</div>
+  <div class="ptab" onclick="tabClick(this,'youtube')">▶️ YouTube</div>
+  <div class="ptab" onclick="tabClick(this,'direct')">🔗 Direct Link</div>
+</div>
+
+<section class="input-section">
+  <div class="main-card">
+    <div class="card-top">
+      <div class="card-title">🔗 Paste your video link below</div>
+      <span class="det-badge" id="detBadge">Detecting...</span>
     </div>
-
-    <div class="input-group">
-      <input class="link-input" id="linkInput" type="url" placeholder="Paste TeraBox or video link here..."/>
-      <button class="play-btn" id="playBtn" onclick="handlePlay()">▶ Play Video</button>
-    </div>
-
-    <div class="status-bar" id="statusBar">
-      <div class="spinner" id="spinner"></div>
-      <span id="statusText">Loading video...</span>
-    </div>
-
-    <div class="video-container" id="videoContainer">
-      <video id="videoPlayer" controls autoplay playsinline></video>
-    </div>
-
-    <div class="action-bar" id="actionBar">
-      <a class="action-btn btn-download" id="downloadBtn" href="#" download>⬇ Download Video</a>
-      <button class="action-btn btn-copy" onclick="copyLink()">📋 Copy Direct Link</button>
+    <div class="card-body">
+      <div class="input-wrapper">
+        <input class="url-input" id="urlInput" type="url"
+          placeholder="Paste TeraBox, MDisk, PDisk, Drive, Pixeldrain, YouTube or any video link..."
+          autocomplete="off" spellcheck="false"/>
+        <button class="open-btn" id="openBtn" onclick="handlePlay()">▶ Open Video</button>
+      </div>
+      <div class="msg-bar" id="msgBar"></div>
+      <div class="action-row" id="actionRow">
+        <a class="action-btn download" id="dlBtn" href="#" target="_blank" rel="noopener">⬇️ Download Video</a>
+        <button class="action-btn copy" onclick="copyLink()">📋 Copy Direct Link</button>
+        <button class="action-btn clear" onclick="resetAll()">✕</button>
+      </div>
+      <div class="player-wrap" id="playerWrap">
+        <div class="loading-box" id="loadingBox">
+          <div class="loader-ring"></div>
+          <div class="loader-text">Fetching video stream...</div>
+          <div class="loader-sub" id="loaderSub">Connecting...</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<hr class="divider"/>
-
-<section class="section" id="how">
-  <div class="section-title">How It Works</div>
-  <div class="section-sub">3 simple steps — takes less than 10 seconds</div>
-  <div class="steps-grid">
-    <div class="step-card">
-      <div class="step-num">1</div>
-      <h3>Copy TeraBox Link</h3>
-      <p>Open TeraBox, find your video, tap Share, and copy the link from the app or website.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-num">2</div>
-      <h3>Paste & Click Play</h3>
-      <p>Paste the link into the box above and hit the Play button. We process it instantly.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-num">3</div>
-      <h3>Watch & Download</h3>
-      <p>Your video starts playing immediately in the browser. Download with one click if needed.</p>
-    </div>
-  </div>
-</section>
-
-<hr class="divider"/>
-
-<section class="section" id="features">
-  <div class="section-title">Why Use TeraPlay?</div>
-  <div class="section-sub">Built for speed, simplicity, and privacy</div>
-  <div class="features-grid">
-    <div class="feature-card">
-      <div class="feature-icon">⚡</div>
-      <div><h4>Lightning Fast</h4><p>Videos start playing in seconds. No buffering, no delays, no frustration.</p></div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🆓</div>
-      <div><h4>100% Free</h4><p>No subscriptions, no hidden fees. Completely free to use forever.</p></div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">📱</div>
-      <div><h4>Works on All Devices</h4><p>Mobile, tablet, desktop — TeraPlay works perfectly on any screen size.</p></div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🔒</div>
-      <div><h4>Private & Secure</h4><p>We don't store your links or personal data. Your privacy is protected.</p></div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">📥</div>
-      <div><h4>One-Click Download</h4><p>Download any video directly to your device with a single tap.</p></div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🚫</div>
-      <div><h4>No App Required</h4><p>Works entirely in your browser. Zero installations, zero hassle.</p></div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider"/>
+<div class="stats-row">
+  <div class="stat-item"><div class="stat-n blue">9+</div><div class="stat-l">Platforms</div></div>
+  <div class="stat-item"><div class="stat-n green">0</div><div class="stat-l">Ads Ever</div></div>
+  <div class="stat-item"><div class="stat-n blue">∞</div><div class="stat-l">Videos</div></div>
+  <div class="stat-item"><div class="stat-n green">&lt;3s</div><div class="stat-l">Load Time</div></div>
+  <div class="stat-item"><div class="stat-n blue">0</div><div class="stat-l">Login Needed</div></div>
+</div>
 
 <section class="section">
-  <div class="section-title">About TeraPlay</div>
-  <div style="color: var(--muted); font-size: 15px; line-height: 1.9; max-width: 800px;">
-    <p style="margin-bottom: 16px;">
-      <strong style="color: var(--text);">TeraPlay</strong> is the fastest and most reliable way to play TeraBox videos online — without downloading the TeraBox app. Whether someone shared a TeraBox video link with you, or you stored your own videos on TeraBox cloud storage, TeraPlay lets you watch them instantly in any modern web browser.
-    </p>
-    <p style="margin-bottom: 16px;">
-      Simply paste your TeraBox share link into the player above and click Play. TeraPlay processes the link and streams the video directly to your browser. No sign-up required, no registration, no app installation needed.
-    </p>
-    <p>
-      TeraPlay also supports direct MP4 video URLs and Google Drive public video links. It works perfectly on Android phones, iPhones, Windows PCs, Macs, and all modern browsers including Chrome, Firefox, Safari, and Edge.
-    </p>
+  <div class="section-head">
+    <div class="section-eyebrow">All Platforms</div>
+    <h2 class="section-title">Every Platform. One Tool.</h2>
+    <p class="section-sub">No other tool covers all these platforms together. This is your unfair advantage.</p>
+  </div>
+  <div class="platforms-grid">
+    <div class="platform-card"><span class="platform-icon">📦</span><div class="platform-name">TeraBox</div><div class="platform-desc">Play public TeraBox share links without the app.</div><span class="platform-badge badge-hot">Most Popular</span></div>
+    <div class="platform-card"><span class="platform-icon">💿</span><div class="platform-name">MDisk</div><div class="platform-desc">India's fastest growing video hosting — fully supported.</div><span class="platform-badge badge-hot">Trending</span></div>
+    <div class="platform-card"><span class="platform-icon">💾</span><div class="platform-name">PDisk</div><div class="platform-desc">Open PDisk video links directly in your browser.</div><span class="platform-badge badge-new">Supported</span></div>
+    <div class="platform-card"><span class="platform-icon">🗂️</span><div class="platform-name">Google Drive</div><div class="platform-desc">Play any public Google Drive video file seamlessly.</div><span class="platform-badge badge-pro">Global</span></div>
+    <div class="platform-card"><span class="platform-icon">⚡</span><div class="platform-name">Pixeldrain</div><div class="platform-desc">Western users' favorite file host — works perfectly.</div><span class="platform-badge badge-new">New</span></div>
+    <div class="platform-card"><span class="platform-icon">🎞️</span><div class="platform-name">Streamtape</div><div class="platform-desc">Direct Streamtape video playback with no redirect.</div><span class="platform-badge badge-new">New</span></div>
+    <div class="platform-card"><span class="platform-icon">📁</span><div class="platform-name">Gofile</div><div class="platform-desc">Play Gofile shared videos directly without downloading.</div><span class="platform-badge badge-new">New</span></div>
+    <div class="platform-card"><span class="platform-icon">▶️</span><div class="platform-name">YouTube</div><div class="platform-desc">Clean, distraction-free YouTube video player.</div><span class="platform-badge badge-pro">Bonus</span></div>
+    <div class="platform-card"><span class="platform-icon">🔗</span><div class="platform-name">Direct Links</div><div class="platform-desc">Any direct .mp4, .mkv, .webm URL works instantly.</div><span class="platform-badge badge-pro">Universal</span></div>
   </div>
 </section>
 
-<hr class="divider"/>
+<section class="section">
+  <div class="section-head">
+    <div class="section-eyebrow">Simple Process</div>
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-sub">Three steps is all it takes.</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-item"><div class="step-circle">1</div><div class="step-title">Copy Your Link</div><p class="step-desc">Go to TeraBox, MDisk, or any supported platform and copy the share link of your video.</p></div>
+    <div class="step-item"><div class="step-circle">2</div><div class="step-title">Paste & Click</div><p class="step-desc">Paste the link above and click "Open Video". We auto-detect the platform instantly.</p></div>
+    <div class="step-item"><div class="step-circle">3</div><div class="step-title">Watch or Download</div><p class="step-desc">Video plays right in your browser. One-click download for offline viewing.</p></div>
+  </div>
+</section>
 
-<section class="section" id="faq">
-  <div class="section-title">Frequently Asked Questions</div>
-  <div class="section-sub">Everything you need to know about TeraPlay</div>
+<section class="section">
+  <div class="section-head">
+    <div class="section-eyebrow">Why VidLinkOpen</div>
+    <h2 class="section-title">Built Different</h2>
+    <p class="section-sub">Every detail crafted for the best video opening experience.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card f1"><div class="ftop"></div><div class="feat-icon">⚡</div><div class="feat-title">Lightning Fast</div><p class="feat-desc">Powered by Vercel's global CDN with 150+ edge locations. Your video loads under 3 seconds anywhere in the world.</p></div>
+    <div class="feature-card f2"><div class="ftop"></div><div class="feat-icon">🔒</div><div class="feat-title">100% Private</div><p class="feat-desc">We never store your links or track your videos. Zero data collection. Your privacy is non-negotiable.</p></div>
+    <div class="feature-card f3"><div class="ftop"></div><div class="feat-icon">📱</div><div class="feat-title">All Devices</div><p class="feat-desc">Works perfectly on Android, iPhone, PC, tablet. No app installation. Just open browser and play.</p></div>
+    <div class="feature-card f4"><div class="ftop"></div><div class="feat-icon">🌍</div><div class="feat-title">Crash Proof</div><p class="feat-desc">1 lakh users can visit at once — site won't crash. Serverless architecture scales infinitely.</p></div>
+    <div class="feature-card f1"><div class="ftop"></div><div class="feat-icon">🎯</div><div class="feat-title">Auto Detection</div><p class="feat-desc">Paste any link — we automatically detect the platform and use the best method to open your video.</p></div>
+    <div class="feature-card f2"><div class="ftop"></div><div class="feat-icon">🚫</div><div class="feat-title">Zero Ads</div><p class="feat-desc">No popups. No redirects. No annoying banners. Clean, distraction-free video playback. Always.</p></div>
+  </div>
+</section>
+
+<section class="seo-content">
+  <h2>The Best Free Online Video Link Opener</h2>
+  <p>VidLinkOpen is the world's most comprehensive online video link opener supporting all major platforms including TeraBox, MDisk, PDisk, Google Drive, Pixeldrain, Streamtape, Gofile, YouTube and any direct video URL. No software installation, no registration, completely free.</p>
+  <h2>Play TeraBox Videos Online Without App</h2>
+  <p>TeraBox is one of the most popular cloud storage platforms offering 1TB free storage. VidLinkOpen lets you paste any public TeraBox share link and watch it directly in your browser on any device — no app needed.</p>
+  <h2>MDisk & PDisk Video Player Online</h2>
+  <p>MDisk and PDisk are fast-growing Indian video hosting platforms. VidLinkOpen fully supports both, letting you watch MDisk and PDisk videos online without any app or account. Just paste and play.</p>
+  <h2>Pixeldrain, Streamtape & Gofile Player</h2>
+  <p>For international users, VidLinkOpen also supports Pixeldrain, Streamtape and Gofile — the most popular file hosting platforms in Europe and the US. One tool for the whole world.</p>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div class="section-eyebrow">FAQ</div>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <p class="section-sub">Everything you need to know.</p>
+  </div>
   <div class="faq-list">
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        Is TeraPlay free to use?
-        <span class="faq-arrow">⌄</span>
-      </div>
-      <div class="faq-a">Yes, TeraPlay is 100% free. There are no hidden charges, no premium plans, and no login required. Just paste your link and play.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        Does TeraPlay store my video files?
-        <span class="faq-arrow">⌄</span>
-      </div>
-      <div class="faq-a">No. TeraPlay does not store any videos on our servers. We process your link and stream the video directly from TeraBox's servers to your browser. We never save your links or data.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        Which types of TeraBox links are supported?
-        <span class="faq-arrow">⌄</span>
-      </div>
-      <div class="faq-a">TeraPlay supports public TeraBox share links from terabox.com, 1024tera.com, and teraboxapp.com. Private or password-protected links may not work.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        Can I download the video after playing?
-        <span class="faq-arrow">⌄</span>
-      </div>
-      <div class="faq-a">Yes! After the video loads, a Download button appears below the player. Click it to save the video directly to your device for offline viewing.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        Why is my TeraBox link not working?
-        <span class="faq-arrow">⌄</span>
-      </div>
-      <div class="faq-a">Make sure the link is a public share link and not private or expired. Also ensure the link is from terabox.com, 1024tera.com, or teraboxapp.com. Private links and password-protected files are not supported.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        Does TeraPlay work on mobile phones?
-        <span class="faq-arrow">⌄</span>
-      </div>
-      <div class="faq-a">Absolutely! TeraPlay is fully optimized for mobile devices. It works on Android and iPhone browsers without any app installation required.</div>
-    </div>
+    <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Is VidLinkOpen completely free?<span class="faq-chevron">▾</span></button><div class="faq-answer"><p>Yes, 100% free forever. No hidden fees, no premium plans, no credit card required. Just paste and play.</p></div></div>
+    <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Why is my TeraBox link not working?<span class="faq-chevron">▾</span></button><div class="faq-answer"><p>VidLinkOpen only works with public share links. If your TeraBox file is private, it cannot be accessed without login. Make sure your link is a public share link (usually contains /s/ in the URL).</p></div></div>
+    <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Can 1 lakh users use this simultaneously?<span class="faq-chevron">▾</span></button><div class="faq-answer"><p>Yes! We use serverless architecture on Vercel's global CDN. We don't store or serve any video files — we just open links. The site scales infinitely without crashing, regardless of simultaneous users.</p></div></div>
+    <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Do I need to create an account?<span class="faq-chevron">▾</span></button><div class="faq-answer"><p>No account needed. No email, no phone number, no sign up. Just open the website, paste your link, and watch. That simple.</p></div></div>
+    <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">Does it work on mobile?<span class="faq-chevron">▾</span></button><div class="faq-answer"><p>Absolutely. VidLinkOpen is fully responsive and works perfectly on all Android and iOS browsers. No app needed.</p></div></div>
+    <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)">What video formats are supported?<span class="faq-chevron">▾</span></button><div class="faq-answer"><p>We support MP4, MKV, WebM, M3U8 (HLS), AVI, MOV and more. If your browser can play it, VidLinkOpen can open it.</p></div></div>
   </div>
 </section>
 
 <footer>
-  <div class="footer-links">
-    <a href="#">Privacy Policy</a>
-    <a href="#">Terms of Use</a>
-    <a href="#">Contact Us</a>
-    <a href="#faq">FAQ</a>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo"><span class="vid">Vid</span><span class="link">Link</span><span class="open">Open</span></div>
+        <p>The world's most complete online video link opener. Play TeraBox, MDisk, PDisk, Google Drive, Pixeldrain and more — all in one place, free.</p>
+      </div>
+      <div class="footer-links-group">
+        <h4>Players</h4>
+        <a href="#">TeraBox Player</a>
+        <a href="#">MDisk Player</a>
+        <a href="#">PDisk Player</a>
+        <a href="#">Google Drive Player</a>
+        <a href="#">Pixeldrain Player</a>
+      </div>
+      <div class="footer-links-group">
+        <h4>Company</h4>
+        <a href="#">About Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact</a>
+        <a href="#">Blog</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 VidLinkOpen. All rights reserved.</div>
+      <div class="footer-disc">Not affiliated with TeraBox, MDisk, PDisk or any platform mentioned.</div>
+    </div>
   </div>
-  <p>© 2025 TeraPlay. All rights reserved. Not affiliated with TeraBox or Flextech Inc.</p>
 </footer>
 
-<div class="toast" id="toast">✅ Link copied to clipboard!</div>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"VidLinkOpen","url":"https://vidlinkopen.com","description":"Free online video link opener supporting TeraBox, MDisk, PDisk, Google Drive, Pixeldrain, Streamtape, Gofile, YouTube and direct video links.","applicationCategory":"MultimediaApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
 
 <script>
-  let currentVideoUrl = '';
+// ═══════════════════════════════════════════
+//  VidLinkOpen — Video Engine v1.0
+// ═══════════════════════════════════════════
+let directUrl = '';
 
-  function isTeraboxLink(url) {
-    return /terabox\.com|1024tera\.com|teraboxapp\.com|terabox\.app|4funbox\.com/i.test(url);
+const PLATFORM_LABELS = {
+  terabox:'📦 TeraBox',mdisk:'💿 MDisk',pdisk:'💾 PDisk',
+  gdrive:'🗂️ Google Drive',pixeldrain:'⚡ Pixeldrain',
+  streamtape:'🎞️ Streamtape',gofile:'📁 Gofile',
+  youtube:'▶️ YouTube',direct:'🔗 Direct Link'
+};
+
+function detect(url) {
+  if(!url) return null;
+  const u = url.toLowerCase();
+  if(/\.(mp4|webm|mkv|avi|mov|m3u8|ts|ogg)(\?|#|$)/i.test(u)) return 'direct';
+  if(/terabox\.com|1024terabox\.com|teraboxapp\.com|freeterabox\.com|nephobox\.com|4funbox/i.test(u)) return 'terabox';
+  if(/mdisk\.me/i.test(u)) return 'mdisk';
+  if(/pdisk\.(me|vip|in)/i.test(u)) return 'pdisk';
+  if(/drive\.google\.com/i.test(u)) return 'gdrive';
+  if(/pixeldrain\.com/i.test(u)) return 'pixeldrain';
+  if(/streamtape\.(com|net)/i.test(u)) return 'streamtape';
+  if(/gofile\.io/i.test(u)) return 'gofile';
+  if(/youtube\.com|youtu\.be/i.test(u)) return 'youtube';
+  return 'unknown';
+}
+
+// Live detect on type
+document.getElementById('urlInput').addEventListener('input', function() {
+  const p = detect(this.value);
+  const b = document.getElementById('detBadge');
+  if(p && p !== 'unknown' && this.value.trim()){
+    b.textContent = PLATFORM_LABELS[p] || '🔗 Link';
+    b.classList.add('show');
+  } else {
+    b.classList.remove('show');
   }
+});
 
-  function isDirectVideoLink(url) {
-    return /\.(mp4|webm|ogg|mov|mkv)(\?.*)?$/i.test(url);
-  }
+document.getElementById('urlInput').addEventListener('keydown', e => {
+  if(e.key === 'Enter') handlePlay();
+});
 
-  function isGoogleDriveLink(url) {
-    return /drive\.google\.com/i.test(url);
-  }
+document.getElementById('urlInput').addEventListener('paste', () => {
+  setTimeout(handlePlay, 200);
+});
 
-  function getGoogleDriveEmbedUrl(url) {
-    const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-    if (match) return `https://drive.google.com/file/d/${match[1]}/preview`;
-    return null;
-  }
+function tabClick(el, type) {
+  document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const demos = {
+    terabox:'https://www.terabox.com/s/example-link-here',
+    mdisk:'https://mdisk.me/example',
+    pdisk:'https://pdisk.me/example',
+    gdrive:'https://drive.google.com/file/d/FILE_ID/view',
+    pixeldrain:'https://pixeldrain.com/u/FILE_ID',
+    streamtape:'https://streamtape.com/v/VIDEO_ID',
+    gofile:'https://gofile.io/d/CONTENT_ID',
+    youtube:'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    direct:'https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4'
+  };
+  const input = document.getElementById('urlInput');
+  input.value = demos[type] || '';
+  input.dispatchEvent(new Event('input'));
+  input.focus();
+}
 
-  async function handlePlay() {
-    const input = document.getElementById('linkInput').value.trim();
-    if (!input) {
-      showStatus('⚠️ Please paste a valid video link first.', 'error');
-      return;
-    }
+// ─── UI ───────────────────────────────────
+function msg(text, type='info') {
+  const el = document.getElementById('msgBar');
+  const ic = {error:'❌',info:'ℹ️',success:'✅',warning:'⚠️'};
+  el.className = `msg-bar ${type} show`;
+  el.innerHTML = `<span style="flex-shrink:0">${ic[type]||'ℹ️'}</span><span>${text}</span>`;
+}
+function hideMsg(){document.getElementById('msgBar').className='msg-bar';}
 
-    resetPlayer();
-    document.getElementById('playBtn').disabled = true;
+function loading(on, sub='Connecting...') {
+  const lb = document.getElementById('loadingBox');
+  if(document.getElementById('loaderSub')) document.getElementById('loaderSub').textContent = sub;
+  lb.className = on ? 'loading-box show' : 'loading-box';
+}
 
-    try {
-      if (isDirectVideoLink(input)) {
-        showStatus('Playing video...', 'loading');
-        playVideo(input);
-        showStatus('✅ Video ready!', 'success');
+function showWrap() {
+  document.getElementById('playerWrap').className = 'player-wrap show';
+}
 
-      } else if (isGoogleDriveLink(input)) {
-        showStatus('Loading Google Drive video...', 'loading');
-        const embedUrl = getGoogleDriveEmbedUrl(input);
-        if (!embedUrl) throw new Error('Invalid Google Drive link');
-        playIframe(embedUrl);
-        showStatus('✅ Video ready!', 'success');
+function setPlayer(html) {
+  const w = document.getElementById('playerWrap');
+  w.className = 'player-wrap show';
+  w.innerHTML = html;
+}
 
-      } else if (isTeraboxLink(input)) {
-        showStatus('Fetching TeraBox video stream...', 'loading');
+function showActions(url) {
+  directUrl = url || '';
+  const row = document.getElementById('actionRow');
+  row.className = 'action-row show';
+  const dl = document.getElementById('dlBtn');
+  if(url){ dl.href = url; dl.style.display = 'flex'; }
+  else { dl.style.display = 'none'; }
+}
 
-        let videoUrl = null;
+function resetAll() {
+  const w = document.getElementById('playerWrap');
+  w.className = 'player-wrap';
+  w.innerHTML = `<div class="loading-box" id="loadingBox">
+    <div class="loader-ring"></div>
+    <div class="loader-text">Fetching video stream...</div>
+    <div class="loader-sub" id="loaderSub">Connecting...</div>
+  </div>`;
+  document.getElementById('actionRow').className = 'action-row';
+  document.getElementById('msgBar').className = 'msg-bar';
+  document.getElementById('urlInput').value = '';
+  document.getElementById('detBadge').classList.remove('show');
+  document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+  directUrl = '';
+}
 
-        // Try API 1
-        try {
-          const r1 = await fetch(`https://terabox-downloader-hyper.vercel.app/api?url=${encodeURIComponent(input)}`);
-          const d1 = await r1.json();
-          videoUrl = d1.url || d1.download_url || d1.downloadUrl || null;
-        } catch(e) {}
-
-        // Try API 2
-        if (!videoUrl) {
-          try {
-            const r2 = await fetch(`https://terabox.hnn.workers.dev/?url=${encodeURIComponent(input)}`);
-            const d2 = await r2.json();
-            videoUrl = d2.url || d2.link || null;
-          } catch(e) {}
-        }
-
-        // Try API 3
-        if (!videoUrl) {
-          try {
-            const r3 = await fetch(`https://api.teraboxapp.com/api/v1/download?url=${encodeURIComponent(input)}`);
-            const d3 = await r3.json();
-            videoUrl = d3.url || d3.downloadUrl || null;
-          } catch(e) {}
-        }
-
-        if (videoUrl) {
-          playVideo(videoUrl);
-          showStatus('✅ Video ready!', 'success');
-        } else {
-          showStatus('❌ Could not load this TeraBox link. Make sure it is a public share link.', 'error');
-        }
-
-      } else {
-        // Try as generic video
-        showStatus('Loading video...', 'loading');
-        playVideo(input);
-        showStatus('✅ Playing video!', 'success');
-      }
-
-    } catch (err) {
-      showStatus('❌ Failed to load video. Please check your link and try again.', 'error');
-    }
-
-    document.getElementById('playBtn').disabled = false;
-  }
-
-  function playVideo(url) {
-    currentVideoUrl = url;
-    const container = document.getElementById('videoContainer');
-    const player = document.getElementById('videoPlayer');
-    const iframe = container.querySelector('iframe');
-    if (iframe) iframe.remove();
-    player.style.display = 'block';
-    player.src = url;
-    player.load();
-    player.play().catch(() => {});
-    container.style.display = 'block';
-    document.getElementById('actionBar').style.display = 'flex';
-    document.getElementById('downloadBtn').href = url;
-    setTimeout(() => container.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
-  }
-
-  function playIframe(url) {
-    currentVideoUrl = url;
-    const container = document.getElementById('videoContainer');
-    const player = document.getElementById('videoPlayer');
-    player.style.display = 'none';
-    let iframe = container.querySelector('iframe');
-    if (!iframe) {
-      iframe = document.createElement('iframe');
-      iframe.allowFullscreen = true;
-      iframe.allow = 'autoplay; fullscreen';
-      container.appendChild(iframe);
-    }
-    iframe.src = url;
-    container.style.display = 'block';
-    document.getElementById('actionBar').style.display = 'flex';
-    document.getElementById('downloadBtn').href = url;
-    setTimeout(() => container.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
-  }
-
-  function resetPlayer() {
-    const container = document.getElementById('videoContainer');
-    const player = document.getElementById('videoPlayer');
-    player.src = '';
-    container.style.display = 'none';
-    document.getElementById('actionBar').style.display = 'none';
-    document.getElementById('statusBar').style.display = 'none';
-  }
-
-  function showStatus(msg, type) {
-    const bar = document.getElementById('statusBar');
-    const text = document.getElementById('statusText');
-    const spinner = document.getElementById('spinner');
-    bar.className = 'status-bar';
-    bar.style.display = 'flex';
-    text.textContent = msg;
-    spinner.style.display = type === 'loading' ? 'block' : 'none';
-    if (type === 'error') bar.classList.add('error');
-    if (type === 'success') {
-      bar.classList.add('success');
-      setTimeout(() => { bar.style.display = 'none'; }, 3000);
-    }
-  }
-
-  function copyLink() {
-    if (!currentVideoUrl) return;
-    navigator.clipboard.writeText(currentVideoUrl).then(() => {
-      const toast = document.getElementById('toast');
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2500);
-    });
-  }
-
-  function toggleFaq(el) {
-    const item = el.parentElement;
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-  }
-
-  document.getElementById('linkInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') handlePlay();
+function copyLink() {
+  if(!directUrl) return;
+  navigator.clipboard.writeText(directUrl).then(()=>{
+    msg('Link copied! Paste in IDM or any download manager.','success');
+  }).catch(()=>{
+    const ta = document.createElement('textarea');
+    ta.value = directUrl;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    msg('Link copied!','success');
   });
+}
+
+function btnState(loading) {
+  const b = document.getElementById('openBtn');
+  b.disabled = loading;
+  b.textContent = loading ? '⏳ Opening...' : '▶ Open Video';
+}
+
+// ─── CORS PROXIES ─────────────────────────
+const PROXIES = [
+  u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+  u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+  u => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`,
+];
+
+async function proxyFetch(url, timeout=9000) {
+  for(const px of PROXIES){
+    try{
+      const r = await fetch(px(url),{signal:AbortSignal.timeout(timeout)});
+      if(r.ok) return await r.text();
+    }catch(e){}
+  }
+  return null;
+}
+
+// ─── RESOLVERS ────────────────────────────
+
+function playDirect(url) {
+  setPlayer(`<video controls autoplay style="width:100%;max-height:500px;background:#000;display:block">
+    <source src="${url}" type="video/mp4">Your browser does not support HTML5 video.</video>`);
+  showActions(url);
+  msg('✅ Video loaded! Press play.','success');
+}
+
+function playYoutube(url) {
+  const m = url.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([a-zA-Z0-9_-]{11})/);
+  if(!m){ msg('Invalid YouTube URL.','error'); return; }
+  setPlayer(`<iframe src="https://www.youtube.com/embed/${m[1]}?autoplay=1&rel=0"
+    allow="autoplay;fullscreen;picture-in-picture" allowfullscreen
+    style="width:100%;height:440px;border:none;display:block"></iframe>`);
+  showActions();
+  msg('YouTube video loaded.','success');
+}
+
+function playDrive(url) {
+  const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  if(!m){ msg('Invalid Google Drive URL.','error'); return; }
+  const id = m[1];
+  setPlayer(`<iframe src="https://drive.google.com/file/d/${id}/preview"
+    allow="autoplay;fullscreen" allowfullscreen
+    style="width:100%;height:440px;border:none;display:block"></iframe>`);
+  showActions(`https://drive.google.com/uc?export=download&id=${id}`);
+  msg('Google Drive video loaded.','success');
+}
+
+function playPixeldrain(url) {
+  const m = url.match(/pixeldrain\.com\/(?:u|l)\/([a-zA-Z0-9]+)/);
+  if(!m){ msg('Invalid Pixeldrain URL.','error'); return; }
+  const id = m[1];
+  const src = `https://pixeldrain.com/api/file/${id}`;
+  setPlayer(`<video controls autoplay style="width:100%;max-height:500px;background:#000;display:block">
+    <source src="${src}" type="video/mp4"></video>`);
+  showActions(src);
+  msg('Pixeldrain video loaded!','success');
+}
+
+async function playGofile(url) {
+  const m = url.match(/gofile\.io\/d\/([a-zA-Z0-9]+)/);
+  if(!m){ msg('Invalid Gofile URL.','error'); return; }
+  showWrap(); loading(true,'Fetching Gofile content...');
+  try{
+    const tr = await fetch('https://api.gofile.io/accounts',{method:'POST',signal:AbortSignal.timeout(8000)});
+    const td = await tr.json();
+    const token = td?.data?.token;
+    const cr = await fetch(`https://api.gofile.io/contents/${m[1]}?wt=4fd6sg89d7s6&cache=true`,
+      {headers: token?{Authorization:`Bearer ${token}`}:{}});
+    const cd = await cr.json();
+    if(cd.status !== 'ok') throw new Error('Not ok');
+    const files = Object.values(cd.data?.children || {});
+    const vid = files.find(f=>f.type==='file'&&/\.(mp4|webm|mkv|mov)/i.test(f.name||'')) || files.find(f=>f.type==='file');
+    if(!vid?.link) throw new Error('No file');
+    loading(false);
+    setPlayer(`<video controls autoplay style="width:100%;max-height:500px;background:#000;display:block">
+      <source src="${vid.link}" type="video/mp4"></video>`);
+    showActions(vid.link);
+    msg('Gofile video loaded!','success');
+  }catch(e){
+    loading(false);
+    document.getElementById('playerWrap').className='player-wrap';
+    msg('Could not load Gofile content. File may be private or expired.','error');
+  }
+}
+
+async function playStreamtape(url) {
+  const m = url.match(/streamtape\.(?:com|net)\/v\/([a-zA-Z0-9]+)/);
+  if(!m){ msg('Invalid Streamtape URL.','error'); return; }
+  showWrap(); loading(true,'Loading Streamtape...');
+  loading(false);
+  setPlayer(`<iframe src="https://streamtape.com/e/${m[1]}"
+    allow="fullscreen" allowfullscreen
+    style="width:100%;height:440px;border:none;display:block"></iframe>`);
+  showActions();
+  msg('Streamtape video loaded!','success');
+}
+
+async function playMdisk(url) {
+  const m = url.match(/mdisk\.me\/([a-zA-Z0-9]+)/i);
+  if(!m){ msg('Invalid MDisk URL. Format: mdisk.me/XXXXX','error'); return; }
+  const id = m[1];
+  showWrap(); loading(true,'Loading MDisk video...');
+  // Try direct embed variants
+  const embedUrls = [
+    `https://mdisk.me/video/${id}`,
+    `https://mdisk.me/embed/${id}`,
+    `https://mdisk.me/v/${id}`,
+  ];
+  loading(false);
+  setPlayer(`<iframe src="${embedUrls[0]}"
+    allow="autoplay;fullscreen" allowfullscreen
+    style="width:100%;height:440px;border:none;display:block"
+    onerror="this.src='${embedUrls[1]}'"></iframe>`);
+  showActions();
+  msg('MDisk video loaded! If blank, the link may be expired.','success');
+}
+
+async function playPdisk(url) {
+  const m = url.match(/pdisk\.(?:me|vip|in)\/([a-zA-Z0-9]+)/i);
+  if(!m){ msg('Invalid PDisk URL.','error'); return; }
+  const id = m[1];
+  showWrap(); loading(true,'Loading PDisk video...');
+  loading(false);
+  setPlayer(`<iframe src="https://pdisk.me/embed/${id}"
+    allow="autoplay;fullscreen" allowfullscreen
+    style="width:100%;height:440px;border:none;display:block"></iframe>`);
+  showActions();
+  msg('PDisk video loaded!','success');
+}
+
+async function playTerabox(url) {
+  showWrap(); loading(true,'Connecting to TeraBox...');
+  const apis = [
+    `https://terabox-dl.vercel.app/api/get?url=${encodeURIComponent(url)}`,
+    `https://tbdl.vercel.app/?url=${encodeURIComponent(url)}`,
+    `https://teraboxvideo.com/api/?url=${encodeURIComponent(url)}`,
+    `https://terabox-player.vercel.app/api?url=${encodeURIComponent(url)}`,
+    `https://api.terabox.to/v1/download?url=${encodeURIComponent(url)}`,
+  ];
+  let vidUrl = null;
+  for(let i=0;i<apis.length;i++){
+    loading(true,`Trying resolver ${i+1}/${apis.length}...`);
+    try{
+      const r = await fetch(apis[i],{signal:AbortSignal.timeout(8000)});
+      if(!r.ok) continue;
+      const d = await r.json();
+      vidUrl = d?.url||d?.download_url||d?.link||d?.data?.url||d?.data?.download_url||
+               d?.result?.url||d?.video_url||d?.direct_link||d?.dlink;
+      if(vidUrl && vidUrl.startsWith('http')) break;
+    }catch(e){}
+  }
+  loading(false);
+  if(vidUrl){
+    setPlayer(`<video controls autoplay style="width:100%;max-height:500px;background:#000;display:block">
+      <source src="${vidUrl}" type="video/mp4">Your browser does not support HTML5 video.</video>`);
+    showActions(vidUrl);
+    msg('TeraBox video loaded! 🎉','success');
+  } else {
+    document.getElementById('playerWrap').className='player-wrap';
+    msg(`<strong>Could not auto-fetch stream.</strong><br>
+    • Make sure it's a <strong>public share link</strong> (not private)<br>
+    • Link format should be: terabox.com/s/XXXXXXX<br>
+    • Private files need TeraBox login — we can't access those`,'warning');
+  }
+}
+
+// ─── MAIN ─────────────────────────────────
+async function handlePlay() {
+  const url = document.getElementById('urlInput').value.trim();
+  if(!url){ msg('Please paste a video link first.','error'); return; }
+  if(!url.startsWith('http')){ msg('Please enter a valid URL (must start with http/https).','error'); return; }
+
+  hideMsg(); btnState(true);
+  // Reset player
+  const w = document.getElementById('playerWrap');
+  w.className = 'player-wrap';
+  w.innerHTML = `<div class="loading-box show" id="loadingBox">
+    <div class="loader-ring"></div>
+    <div class="loader-text">Fetching video stream...</div>
+    <div class="loader-sub" id="loaderSub">Detecting platform...</div>
+  </div>`;
+  document.getElementById('actionRow').className = 'action-row';
+
+  const platform = detect(url);
+  try{
+    switch(platform){
+      case 'direct':     playDirect(url); break;
+      case 'youtube':    playYoutube(url); break;
+      case 'gdrive':     playDrive(url); break;
+      case 'pixeldrain': playPixeldrain(url); break;
+      case 'gofile':     await playGofile(url); break;
+      case 'streamtape': await playStreamtape(url); break;
+      case 'mdisk':      await playMdisk(url); break;
+      case 'pdisk':      await playPdisk(url); break;
+      case 'terabox':    await playTerabox(url); break;
+      default:
+        msg('Platform not recognized. Trying as direct video link...','warning');
+        playDirect(url);
+    }
+  }catch(err){
+    w.className = 'player-wrap';
+    msg('Something went wrong. Please check the link and try again.','error');
+  }
+  btnState(false);
+}
+
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const open = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if(!open) item.classList.add('open');
+}
 </script>
 </body>
 </html>
