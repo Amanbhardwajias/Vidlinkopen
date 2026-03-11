@@ -3,401 +3,323 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>VidLinkOpen – Play Any Video Link Free | TeraBox MDisk PDisk Drive</title>
-<meta name="description" content="Play any video link online instantly. Supports TeraBox, MDisk, PDisk, Google Drive, Pixeldrain, Streamtape, Gofile, YouTube. No app, no login, 100% free."/>
-<meta name="keywords" content="terabox video player online,mdisk player,pdisk player,video link opener,play terabox without app,google drive video player,pixeldrain player,streamtape player,gofile player,online video player free"/>
-<meta name="robots" content="index,follow"/>
-<meta property="og:title" content="VidLinkOpen – Play Any Video Link Instantly Free"/>
-<meta property="og:description" content="TeraBox, MDisk, PDisk, Drive, Pixeldrain, Streamtape, Gofile, YouTube — one tool for all."/>
-<meta property="og:type" content="website"/>
+<title>VidLinkOpen – Play Any Video Link Free | TeraBox TeraShare MDisk PDisk</title>
+<meta name="description" content="Play any video link online free. Supports TeraBox, TeraShare, MDisk, PDisk, Google Drive, Pixeldrain, Streamtape, Gofile, YouTube. No login needed."/>
 <link rel="canonical" href="https://vidlinkopen.com"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<!-- HLS.js for M3U8 stream support -->
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js"></script>
 <style>
 :root{
-  --bg:#05070f;--bg2:#080c18;--surface:#0c1120;--card:#101626;--card2:#141c30;
-  --border:#1a2440;--border2:#1f2d50;--primary:#4f8ef7;--accent:#50f7b1;
-  --danger:#f7504f;--warn:#f7b44f;--text:#e2eaff;--text2:#8899bb;--text3:#4a5a80;
-  --mono:'JetBrains Mono',monospace;
+  --bg:#05070f;--bg2:#080c18;--sur:#0c1120;--card:#0f1524;--card2:#141c30;
+  --b1:#1a2440;--b2:#1f2d50;--pri:#4f8ef7;--acc:#50f7b1;--red:#f7504f;
+  --yel:#f7b44f;--txt:#e2eaff;--t2:#8899bb;--t3:#4a5a80;
 }
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden}
-
-/* BG */
-.bg-orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0}
-.bg-orb.a{width:700px;height:700px;top:-200px;left:-150px;background:radial-gradient(circle,rgba(79,142,247,.06),transparent 70%);animation:o1 14s ease-in-out infinite alternate}
-.bg-orb.b{width:600px;height:600px;bottom:-150px;right:-100px;background:radial-gradient(circle,rgba(80,247,177,.05),transparent 70%);animation:o2 17s ease-in-out infinite alternate}
-@keyframes o1{to{transform:translate(80px,60px) scale(1.15)}}
-@keyframes o2{to{transform:translate(-60px,-50px) scale(1.2)}}
-.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(79,142,247,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(79,142,247,.022) 1px,transparent 1px);background-size:44px 44px}
-
-/* NAV */
-nav{position:sticky;top:0;z-index:200;background:rgba(5,7,15,.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 28px}
-.logo{font-size:1.35rem;font-weight:800;letter-spacing:-.5px;display:flex;gap:1px}
-.logo .v{color:var(--primary)}.logo .l{color:var(--text)}.logo .o{color:var(--accent)}
-.nav-r{display:flex;align-items:center;gap:10px}
-.ndot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
-.ncnt{font-size:.75rem;color:var(--text2);font-weight:500}
-.npill{background:rgba(80,247,177,.08);border:1px solid rgba(80,247,177,.2);color:var(--accent);font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:100px}
-
-/* HERO */
-.hero{position:relative;z-index:1;text-align:center;padding:68px 20px 52px}
-.hbadge{display:inline-flex;align-items:center;gap:8px;background:rgba(79,142,247,.07);border:1px solid rgba(79,142,247,.18);color:var(--primary);font-size:.78rem;font-weight:600;padding:6px 18px;border-radius:100px;margin-bottom:28px;animation:fsd .5s ease both}
-h1{font-size:clamp(1.9rem,5.2vw,3.6rem);font-weight:900;line-height:1.08;letter-spacing:-2px;margin-bottom:18px;animation:fsd .5s .1s ease both}
-h1 .gr{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hsub{font-size:1rem;color:var(--text2);max-width:520px;margin:0 auto 44px;line-height:1.7;font-weight:400;animation:fsd .5s .2s ease both}
-@keyframes fsd{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-
-/* PLATFORM CHIPS */
-.ptabs{position:relative;z-index:1;display:flex;justify-content:center;flex-wrap:wrap;gap:7px;padding:0 20px;margin-bottom:22px;animation:fsd .5s .22s ease both}
-.ptab{display:flex;align-items:center;gap:5px;background:var(--card);border:1px solid var(--border);border-radius:9px;padding:6px 13px;font-size:.76rem;font-weight:600;color:var(--text2);cursor:pointer;transition:all .2s;user-select:none;white-space:nowrap}
-.ptab:hover,.ptab.on{border-color:var(--primary);color:var(--primary);background:rgba(79,142,247,.07)}
-
-/* MAIN CARD */
-.wrap{position:relative;z-index:1;max-width:760px;margin:0 auto 76px;padding:0 18px;animation:fsu .6s .28s ease both}
-.card{background:var(--card);border:1px solid var(--border);border-radius:22px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.55),0 0 0 1px rgba(79,142,247,.04);transition:border-color .3s,box-shadow .3s}
-.card:focus-within{border-color:rgba(79,142,247,.32);box-shadow:0 32px 80px rgba(0,0,0,.55),0 0 60px rgba(79,142,247,.07)}
-.ctop{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.ctitle{font-size:.76rem;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:1.4px}
-.dbadge{display:none;font-size:.7rem;font-weight:700;padding:3px 11px;border-radius:100px;text-transform:uppercase;letter-spacing:.5px;background:rgba(80,247,177,.1);border:1px solid rgba(80,247,177,.22);color:var(--accent)}
-.dbadge.on{display:inline-block}
-.cbody{padding:18px 22px}
+body{background:var(--bg);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden}
+/* background */
+.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0}
+.oa{width:700px;height:700px;top:-200px;left:-200px;background:radial-gradient(circle,rgba(79,142,247,.07) 0%,transparent 65%);animation:oa 14s ease-in-out infinite alternate}
+.ob{width:600px;height:600px;bottom:-200px;right:-200px;background:radial-gradient(circle,rgba(80,247,177,.055) 0%,transparent 65%);animation:ob 18s ease-in-out infinite alternate}
+@keyframes oa{to{transform:translate(100px,80px)scale(1.2)}}
+@keyframes ob{to{transform:translate(-80px,-60px)scale(1.3)}}
+.gbg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(79,142,247,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(79,142,247,.018) 1px,transparent 1px);background-size:44px 44px}
+/* nav */
+nav{position:sticky;top:0;z-index:200;background:rgba(5,7,15,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--b1);height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 28px}
+.logo{font-size:1.3rem;font-weight:800;letter-spacing:-.5px;display:flex;text-decoration:none}
+.lv{color:var(--pri)}.ll{color:var(--txt)}.lo{color:var(--acc)}
+.nr{display:flex;align-items:center;gap:10px}
+.ndot{width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 6px var(--acc);animation:pulse 2.2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.npill{background:rgba(80,247,177,.08);border:1px solid rgba(80,247,177,.2);color:var(--acc);font-size:.7rem;font-weight:700;padding:4px 12px;border-radius:100px}
+/* hero */
+.hero{position:relative;z-index:1;text-align:center;padding:72px 20px 56px}
+.hbdg{display:inline-flex;align-items:center;gap:7px;background:rgba(79,142,247,.07);border:1px solid rgba(79,142,247,.16);color:var(--pri);font-size:.76rem;font-weight:600;padding:6px 18px;border-radius:100px;margin-bottom:28px}
+h1{font-size:clamp(1.9rem,5vw,3.6rem);font-weight:900;line-height:1.06;letter-spacing:-2px;margin-bottom:18px}
+.gr{background:linear-gradient(135deg,var(--pri) 0%,var(--acc) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hsub{font-size:.98rem;color:var(--t2);max-width:540px;margin:0 auto 44px;line-height:1.7}
+/* platform chips */
+.chips{position:relative;z-index:1;display:flex;justify-content:center;flex-wrap:wrap;gap:6px;padding:0 18px;margin-bottom:20px}
+.chip{display:flex;align-items:center;gap:5px;background:var(--card);border:1px solid var(--b1);border-radius:9px;padding:6px 12px;font-size:.74rem;font-weight:600;color:var(--t2);cursor:pointer;transition:all .2s;user-select:none;white-space:nowrap}
+.chip:hover,.chip.on{border-color:var(--pri);color:var(--pri);background:rgba(79,142,247,.07)}
+/* main card */
+.mwrap{position:relative;z-index:1;max-width:780px;margin:0 auto 80px;padding:0 18px}
+.card{background:var(--card);border:1px solid var(--b1);border-radius:22px;overflow:hidden;box-shadow:0 0 0 1px rgba(79,142,247,.04),0 32px 80px rgba(0,0,0,.6);transition:border-color .3s,box-shadow .3s}
+.card:focus-within{border-color:rgba(79,142,247,.3);box-shadow:0 0 0 1px rgba(79,142,247,.08),0 32px 80px rgba(0,0,0,.6),0 0 60px rgba(79,142,247,.07)}
+.ctop{padding:16px 22px;border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.ctitle{font-size:.72rem;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:1.5px}
+.dbdg{display:none;font-size:.68rem;font-weight:700;padding:3px 11px;border-radius:100px;text-transform:uppercase;letter-spacing:.4px;background:rgba(80,247,177,.1);border:1px solid rgba(80,247,177,.22);color:var(--acc)}
+.dbdg.on{display:inline-block}
+.cbody{padding:20px 22px}
+/* input */
 .irow{display:flex;gap:9px}
-.urlin{flex:1;background:var(--surface);border:1px solid var(--border2);border-radius:13px;padding:15px 18px;color:var(--text);font-family:var(--mono);font-size:.83rem;outline:none;transition:border-color .2s,box-shadow .2s;min-width:0}
-.urlin::placeholder{color:var(--text3);font-family:'Outfit',sans-serif;font-size:.87rem}
-.urlin:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(79,142,247,.11)}
-.playbtn{background:linear-gradient(135deg,var(--primary),#3a7be8);color:#fff;border:none;border-radius:13px;padding:15px 26px;font-family:'Outfit',sans-serif;font-weight:700;font-size:.92rem;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:7px;transition:all .2s;box-shadow:0 4px 18px rgba(79,142,247,.28)}
-.playbtn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(79,142,247,.45)}
-.playbtn:active{transform:translateY(0)}
-.playbtn:disabled{opacity:.55;cursor:not-allowed;transform:none !important;box-shadow:none}
-
-/* MESSAGES */
-.msgbar{display:none;margin-top:13px;padding:12px 16px;border-radius:11px;font-size:.86rem;font-weight:500;align-items:flex-start;gap:9px;line-height:1.55}
-.msgbar.on{display:flex}
-.msgbar.e{background:rgba(247,80,79,.09);border:1px solid rgba(247,80,79,.28);color:var(--danger)}
-.msgbar.i{background:rgba(79,142,247,.07);border:1px solid rgba(79,142,247,.18);color:var(--primary)}
-.msgbar.s{background:rgba(80,247,177,.07);border:1px solid rgba(80,247,177,.18);color:var(--accent)}
-.msgbar.w{background:rgba(247,180,79,.07);border:1px solid rgba(247,180,79,.18);color:var(--warn)}
-
-/* VIDEO INFO */
-.vinfo{display:none;align-items:center;gap:10px;margin-top:13px;padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:11px}
+.ui{flex:1;background:var(--sur);border:1px solid var(--b2);border-radius:13px;padding:15px 18px;color:var(--txt);font-family:'JetBrains Mono',monospace;font-size:.82rem;outline:none;transition:border-color .2s,box-shadow .2s;min-width:0}
+.ui::placeholder{color:var(--t3);font-family:'Outfit',sans-serif;font-size:.86rem}
+.ui:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(79,142,247,.11)}
+.gbtn{background:linear-gradient(135deg,#4f8ef7 0%,#3a7be8 100%);color:#fff;border:none;border-radius:13px;padding:15px 26px;font-family:'Outfit',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:7px;transition:all .2s;box-shadow:0 4px 20px rgba(79,142,247,.3)}
+.gbtn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(79,142,247,.5)}
+.gbtn:active{transform:none}
+.gbtn:disabled{opacity:.5;cursor:not-allowed;transform:none!important;box-shadow:none}
+/* messages */
+.mbar{display:none;margin-top:13px;padding:12px 16px;border-radius:11px;font-size:.85rem;font-weight:500;align-items:flex-start;gap:9px;line-height:1.58}
+.mbar.on{display:flex}
+.mbar.e{background:rgba(247,80,79,.09);border:1px solid rgba(247,80,79,.26);color:var(--red)}
+.mbar.i{background:rgba(79,142,247,.07);border:1px solid rgba(79,142,247,.18);color:var(--pri)}
+.mbar.s{background:rgba(80,247,177,.07);border:1px solid rgba(80,247,177,.18);color:var(--acc)}
+.mbar.w{background:rgba(247,180,79,.07);border:1px solid rgba(247,180,79,.18);color:var(--yel)}
+/* video info */
+.vinfo{display:none;align-items:center;gap:10px;margin-top:13px;padding:11px 14px;background:var(--sur);border:1px solid var(--b1);border-radius:11px}
 .vinfo.on{display:flex}
-.vthumb{width:56px;height:38px;object-fit:cover;border-radius:6px;flex-shrink:0;border:1px solid var(--border2)}
-.vmeta{flex:1;min-width:0}
-.vtitle{font-size:.86rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
-.vsize{font-size:.72rem;color:var(--text3)}
-
-/* ACTION BUTTONS */
+.vt{width:54px;height:36px;object-fit:cover;border-radius:5px;flex-shrink:0;border:1px solid var(--b2)}
+.vm{flex:1;min-width:0}
+.vn{font-size:.84rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:2px}
+.vs{font-size:.7rem;color:var(--t3)}
+/* action buttons */
 .arow{display:none;gap:8px;margin-top:12px;flex-wrap:wrap}
 .arow.on{display:flex}
-.abtn{flex:1;min-width:110px;padding:11px 14px;border-radius:11px;font-family:'Outfit',sans-serif;font-weight:600;font-size:.82rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;text-decoration:none;border:none}
-.abtn.dl{background:rgba(80,247,177,.08);border:1px solid rgba(80,247,177,.22);color:var(--accent)}
-.abtn.dl:hover{background:rgba(80,247,177,.15);transform:translateY(-1px)}
-.abtn.cp{background:rgba(79,142,247,.08);border:1px solid rgba(79,142,247,.22);color:var(--primary)}
-.abtn.cp:hover{background:rgba(79,142,247,.15);transform:translateY(-1px)}
-.abtn.op{background:rgba(247,180,79,.07);border:1px solid rgba(247,180,79,.2);color:var(--warn)}
-.abtn.op:hover{background:rgba(247,180,79,.13);transform:translateY(-1px)}
-.abtn.cl{background:rgba(247,80,79,.06);border:1px solid rgba(247,80,79,.18);color:var(--danger);flex:0;padding:11px 13px}
-.abtn.cl:hover{background:rgba(247,80,79,.12)}
-
-/* PLAYER */
-.pvwrap{display:none;margin-top:14px;border-radius:14px;overflow:hidden;background:#000;border:1px solid var(--border);position:relative}
-.pvwrap.on{display:block}
-.pvwrap video{width:100%;max-height:490px;display:block;background:#000}
-.pvwrap iframe{width:100%;height:420px;border:none;display:block}
-.loadbox{display:none;padding:60px 20px;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(5,7,15,.96)}
-.loadbox.on{display:flex}
-.lring{width:46px;height:46px;border:3px solid var(--border2);border-top-color:var(--primary);border-radius:50%;animation:spin .85s linear infinite}
+.ab{flex:1;min-width:100px;padding:10px 13px;border-radius:11px;font-family:'Outfit',sans-serif;font-weight:600;font-size:.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;border:none;transition:all .18s}
+.dl{background:rgba(80,247,177,.08);border:1px solid rgba(80,247,177,.22);color:var(--acc)}
+.dl:hover{background:rgba(80,247,177,.16);transform:translateY(-1px)}
+.cp{background:rgba(79,142,247,.08);border:1px solid rgba(79,142,247,.22);color:var(--pri)}
+.cp:hover{background:rgba(79,142,247,.16);transform:translateY(-1px)}
+.ot{background:rgba(247,180,79,.07);border:1px solid rgba(247,180,79,.2);color:var(--yel)}
+.ot:hover{background:rgba(247,180,79,.14);transform:translateY(-1px)}
+.cl{background:rgba(247,80,79,.06);border:1px solid rgba(247,80,79,.18);color:var(--red);flex:0;padding:10px 14px}
+.cl:hover{background:rgba(247,80,79,.13)}
+/* player */
+.pw{display:none;margin-top:14px;border-radius:14px;overflow:hidden;background:#000;border:1px solid var(--b1)}
+.pw.on{display:block}
+.pw video{width:100%;max-height:500px;display:block;background:#000}
+.pw iframe{width:100%;height:440px;border:none;display:block}
+/* loader */
+.lb{display:none;padding:64px 20px;flex-direction:column;align-items:center;gap:14px}
+.lb.on{display:flex}
+.lr{width:46px;height:46px;border:3px solid var(--b2);border-top-color:var(--pri);border-radius:50%;animation:spin .85s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.ltxt{font-size:.86rem;color:var(--text2);font-weight:500}
-.lsub{font-size:.73rem;color:var(--text3);font-family:var(--mono)}
-
-/* STATS */
-.stats{position:relative;z-index:1;display:flex;justify-content:center;flex-wrap:wrap;background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:90px}
-.si{flex:1;max-width:180px;padding:32px 20px;text-align:center;position:relative}
-.si:not(:last-child)::after{content:'';position:absolute;right:0;top:22%;bottom:22%;width:1px;background:var(--border)}
-.sn{font-size:1.9rem;font-weight:900;letter-spacing:-1px;line-height:1;margin-bottom:7px}
-.sn.b{color:var(--primary)}.sn.g{color:var(--accent)}
-.sl{font-size:.72rem;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:.8px}
-
-/* SECTIONS */
-.sec{position:relative;z-index:1;max-width:1020px;margin:0 auto 90px;padding:0 22px}
-.shead{text-align:center;margin-bottom:46px}
-.sey{font-size:.72rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px}
-.stitle{font-size:clamp(1.5rem,2.8vw,2.1rem);font-weight:800;letter-spacing:-.4px;margin-bottom:10px}
-.ssub{color:var(--text2);font-size:.97rem;line-height:1.6}
-
-/* PLATFORM GRID */
+.lt{font-size:.85rem;color:var(--t2);font-weight:500;text-align:center}
+.ls{font-size:.72rem;color:var(--t3);font-family:'JetBrains Mono',monospace}
+/* stats */
+.stats{position:relative;z-index:1;display:flex;justify-content:center;flex-wrap:wrap;background:var(--card);border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);margin-bottom:96px}
+.si{flex:1;max-width:190px;padding:32px 18px;text-align:center;position:relative}
+.si:not(:last-child)::after{content:'';position:absolute;right:0;top:25%;bottom:25%;width:1px;background:var(--b1)}
+.sn{font-size:1.95rem;font-weight:900;letter-spacing:-1px;line-height:1;margin-bottom:7px}
+.sn.b{color:var(--pri)}.sn.g{color:var(--acc)}
+.sl{font-size:.68rem;color:var(--t3);text-transform:uppercase;letter-spacing:.8px}
+/* sections */
+.sec{position:relative;z-index:1;max-width:1040px;margin:0 auto 96px;padding:0 22px}
+.sh{text-align:center;margin-bottom:48px}
+.sey{font-size:.7rem;font-weight:700;color:var(--pri);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px}
+.stl{font-size:clamp(1.5rem,2.8vw,2.1rem);font-weight:800;letter-spacing:-.4px;margin-bottom:10px}
+.ssb{color:var(--t2);font-size:.96rem;line-height:1.6}
+/* platform grid */
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
-.pc{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px 18px;transition:all .22s;cursor:default}
-.pc:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 14px 36px rgba(0,0,0,.38)}
+.pc{background:var(--card);border:1px solid var(--b1);border-radius:16px;padding:22px 18px;transition:all .22s}
+.pc:hover{border-color:var(--b2);transform:translateY(-4px);box-shadow:0 14px 36px rgba(0,0,0,.38)}
 .pico{font-size:1.9rem;margin-bottom:12px;display:block}
-.pname{font-weight:700;font-size:.92rem;margin-bottom:5px}
-.pdesc{font-size:.78rem;color:var(--text2);line-height:1.5}
-.pbadge{display:inline-block;margin-top:9px;font-size:.65rem;font-weight:700;padding:2px 9px;border-radius:100px;text-transform:uppercase}
-.bhot{background:rgba(247,80,79,.11);color:var(--danger);border:1px solid rgba(247,80,79,.22)}
-.bnew{background:rgba(80,247,177,.09);color:var(--accent);border:1px solid rgba(80,247,177,.22)}
-.bpro{background:rgba(79,142,247,.09);color:var(--primary);border:1px solid rgba(79,142,247,.22)}
-
-/* FEATURES */
+.pn{font-weight:700;font-size:.9rem;margin-bottom:4px}
+.pd{font-size:.77rem;color:var(--t2);line-height:1.5}
+.pb{display:inline-block;margin-top:9px;font-size:.63rem;font-weight:700;padding:2px 9px;border-radius:100px;text-transform:uppercase}
+.hot{background:rgba(247,80,79,.1);color:var(--red);border:1px solid rgba(247,80,79,.22)}
+.new_{background:rgba(80,247,177,.08);color:var(--acc);border:1px solid rgba(80,247,177,.2)}
+.pro{background:rgba(79,142,247,.08);color:var(--pri);border:1px solid rgba(79,142,247,.2)}
+/* feature cards */
 .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
-.fc{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;transition:all .22s;position:relative;overflow:hidden}
-.fline{position:absolute;top:0;left:0;right:0;height:2px;transform:scaleX(0);transform-origin:left;transition:transform .3s}
-.fc:hover .fline{transform:scaleX(1)}
-.fc:hover{border-color:var(--border2);transform:translateY(-3px)}
-.fc.c1 .fline{background:linear-gradient(90deg,var(--primary),var(--accent))}
-.fc.c2 .fline{background:linear-gradient(90deg,var(--accent),#50d4f7)}
-.fc.c3 .fline{background:linear-gradient(90deg,var(--danger),var(--warn))}
-.fc.c4 .fline{background:linear-gradient(90deg,var(--primary),#9050f7)}
-.ficon{width:42px;height:42px;border-radius:11px;background:var(--surface);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:16px}
-.ftitle{font-weight:700;font-size:.97rem;margin-bottom:7px}
-.fdesc{color:var(--text2);font-size:.86rem;line-height:1.6;font-weight:400}
-
-/* STEPS */
+.fc{background:var(--card);border:1px solid var(--b1);border-radius:16px;padding:26px;transition:all .22s;position:relative;overflow:hidden}
+.fln{position:absolute;top:0;left:0;right:0;height:2px;transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.fc:hover .fln{transform:scaleX(1)}.fc:hover{border-color:var(--b2);transform:translateY(-3px)}
+.c1 .fln{background:linear-gradient(90deg,var(--pri),var(--acc))}
+.c2 .fln{background:linear-gradient(90deg,var(--acc),#50d4f7)}
+.c3 .fln{background:linear-gradient(90deg,var(--red),var(--yel))}
+.c4 .fln{background:linear-gradient(90deg,var(--pri),#9050f7)}
+.fi{width:42px;height:42px;border-radius:11px;background:var(--sur);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:16px}
+.ft{font-weight:700;font-size:.96rem;margin-bottom:7px}
+.fd{color:var(--t2);font-size:.85rem;line-height:1.6}
+/* steps */
 .sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px}
 .sti{text-align:center}
-.scircle{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,rgba(79,142,247,.14),rgba(80,247,177,.09));border:1px solid rgba(79,142,247,.28);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.25rem;color:var(--primary);margin:0 auto 18px}
-.stname{font-weight:700;font-size:.92rem;margin-bottom:7px}
-.stdesc{color:var(--text2);font-size:.83rem;line-height:1.6}
-
-/* FAQ */
-.faqitem{border-bottom:1px solid var(--border)}
-.faqbtn{width:100%;background:none;border:none;padding:20px 0;color:var(--text);font-family:'Outfit',sans-serif;font-size:.93rem;font-weight:600;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;transition:color .2s}
-.faqbtn:hover{color:var(--primary)}
-.faqico{width:26px;height:26px;border-radius:7px;background:var(--card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;color:var(--text2);font-size:.85rem}
-.faqitem.op .faqico{background:rgba(79,142,247,.09);border-color:var(--primary);color:var(--primary);transform:rotate(180deg)}
+.snum{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,rgba(79,142,247,.14),rgba(80,247,177,.09));border:1px solid rgba(79,142,247,.28);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.2rem;color:var(--pri);margin:0 auto 18px}
+.snm{font-weight:700;font-size:.9rem;margin-bottom:7px}
+.sds{color:var(--t2);font-size:.82rem;line-height:1.6}
+/* faq */
+.faqitem{border-bottom:1px solid var(--b1)}
+.faqbtn{width:100%;background:none;border:none;padding:20px 0;color:var(--txt);font-family:'Outfit',sans-serif;font-size:.92rem;font-weight:600;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;transition:color .2s}
+.faqbtn:hover{color:var(--pri)}
+.faqico{width:26px;height:26px;border-radius:7px;background:var(--card2);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;color:var(--t2);font-size:.8rem}
+.faqitem.op .faqico{background:rgba(79,142,247,.09);border-color:var(--pri);color:var(--pri);transform:rotate(180deg)}
 .faqans{max-height:0;overflow:hidden;transition:max-height .32s ease}
-.faqitem.op .faqans{max-height:280px}
-.faqans p{padding-bottom:20px;color:var(--text2);font-size:.88rem;line-height:1.72}
-
-/* SEO */
-.seotxt{position:relative;z-index:1;max-width:840px;margin:0 auto 90px;padding:0 22px}
-.seotxt h2{font-size:1.4rem;font-weight:800;margin:28px 0 12px;letter-spacing:-.2px}
-.seotxt h2:first-child{margin-top:0}
-.seotxt p{color:var(--text2);font-size:.91rem;line-height:1.8;margin-bottom:12px}
-
-/* FOOTER */
-footer{position:relative;z-index:1;background:var(--bg2);border-top:1px solid var(--border);padding:48px 22px 32px}
-.fi{max-width:1020px;margin:0 auto}
-.ftop{display:flex;justify-content:space-between;align-items:flex-start;gap:36px;flex-wrap:wrap;margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid var(--border)}
-.fbrand p{color:var(--text2);font-size:.83rem;line-height:1.58;max-width:280px;margin-top:10px}
-.flg h4{font-size:.72rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.4px;margin-bottom:14px}
-.flg a{display:block;color:var(--text2);text-decoration:none;font-size:.86rem;margin-bottom:9px;transition:color .2s}
-.flg a:hover{color:var(--primary)}
-.fbot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-.fbot span{color:var(--text3);font-size:.78rem}
-
+.faqitem.op .faqans{max-height:300px}
+.faqans p{padding-bottom:20px;color:var(--t2);font-size:.87rem;line-height:1.75}
+/* seo */
+.seo{position:relative;z-index:1;max-width:840px;margin:0 auto 96px;padding:0 22px}
+.seo h2{font-size:1.38rem;font-weight:800;margin:28px 0 12px;letter-spacing:-.2px}
+.seo h2:first-child{margin-top:0}
+.seo p{color:var(--t2);font-size:.9rem;line-height:1.8;margin-bottom:12px}
+/* footer */
+footer{position:relative;z-index:1;background:var(--bg2);border-top:1px solid var(--b1);padding:50px 22px 32px}
+.fi2{max-width:1040px;margin:0 auto}
+.ftop{display:flex;justify-content:space-between;align-items:flex-start;gap:36px;flex-wrap:wrap;margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid var(--b1)}
+.fbp{color:var(--t2);font-size:.82rem;line-height:1.58;max-width:280px;margin-top:10px}
+.flg h4{font-size:.7rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1.4px;margin-bottom:14px}
+.flg a{display:block;color:var(--t2);text-decoration:none;font-size:.84rem;margin-bottom:9px;transition:color .2s}
+.flg a:hover{color:var(--pri)}
+.fbot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.fbot span{color:var(--t3);font-size:.76rem}
 @media(max-width:600px){
   nav{padding:0 14px}
-  .ncnt{display:none}
-  .irow{flex-direction:column}
-  .playbtn{justify-content:center}
-  .stats{flex-wrap:wrap}
-  .si{min-width:45%}
-  .si::after{display:none !important}
-  .ftop{flex-direction:column}
-  .fbot{flex-direction:column;text-align:center}
+  .irow{flex-direction:column}.gbtn{justify-content:center}
+  .stats{flex-wrap:wrap}.si{min-width:45%}.si::after{display:none!important}
+  .ftop{flex-direction:column}.fbot{flex-direction:column;text-align:center}
 }
 </style>
 </head>
 <body>
-<div class="bg-orb a"></div>
-<div class="bg-orb b"></div>
-<div class="grid-bg"></div>
+<div class="orb oa"></div>
+<div class="orb ob"></div>
+<div class="gbg"></div>
 
-<!-- NAV -->
 <nav>
-  <div class="logo"><span class="v">Vid</span><span class="l">Link</span><span class="o">Open</span></div>
-  <div class="nav-r">
+  <a class="logo" href="/"><span class="lv">Vid</span><span class="ll">Link</span><span class="lo">Open</span></a>
+  <div class="nr">
     <div class="ndot"></div>
-    <span class="ncnt">9 Platforms</span>
-    <div class="npill">100% Free</div>
+    <div class="npill">10 Platforms · Free</div>
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hbadge">🌍 Works Worldwide &nbsp;·&nbsp; No App Needed &nbsp;·&nbsp; No Login</div>
+  <div class="hbdg">🌍 Works Worldwide · No App · No Login Required</div>
   <h1>Open Any Video Link<br/><span class="gr">Instantly In Your Browser</span></h1>
-  <p class="hsub">TeraBox · MDisk · PDisk · Google Drive · Pixeldrain · Streamtape · Gofile · YouTube — paste any link and watch or download free.</p>
+  <p class="hsub">TeraBox · TeraShare · MDisk · PDisk · Google Drive · Pixeldrain · Streamtape · Gofile · YouTube — paste any link and watch free.</p>
 </section>
 
-<!-- PLATFORM TABS -->
-<div class="ptabs">
-  <div class="ptab" onclick="tabClick(this,'terabox')">📦 TeraBox</div>
-  <div class="ptab" onclick="tabClick(this,'mdisk')">💿 MDisk</div>
-  <div class="ptab" onclick="tabClick(this,'pdisk')">💾 PDisk</div>
-  <div class="ptab" onclick="tabClick(this,'gdrive')">🗂️ Google Drive</div>
-  <div class="ptab" onclick="tabClick(this,'pixeldrain')">⚡ Pixeldrain</div>
-  <div class="ptab" onclick="tabClick(this,'streamtape')">🎞️ Streamtape</div>
-  <div class="ptab" onclick="tabClick(this,'gofile')">📁 Gofile</div>
-  <div class="ptab" onclick="tabClick(this,'youtube')">▶️ YouTube</div>
-  <div class="ptab" onclick="tabClick(this,'direct')">🔗 Direct Link</div>
+<div class="chips">
+  <div class="chip" onclick="tabDemo(this,'terabox')">📦 TeraBox</div>
+  <div class="chip" onclick="tabDemo(this,'terashare')">🔷 TeraShare</div>
+  <div class="chip" onclick="tabDemo(this,'mdisk')">💿 MDisk</div>
+  <div class="chip" onclick="tabDemo(this,'pdisk')">💾 PDisk</div>
+  <div class="chip" onclick="tabDemo(this,'gdrive')">🗂️ Google Drive</div>
+  <div class="chip" onclick="tabDemo(this,'pixeldrain')">⚡ Pixeldrain</div>
+  <div class="chip" onclick="tabDemo(this,'streamtape')">🎞️ Streamtape</div>
+  <div class="chip" onclick="tabDemo(this,'gofile')">📁 Gofile</div>
+  <div class="chip" onclick="tabDemo(this,'youtube')">▶️ YouTube</div>
+  <div class="chip" onclick="tabDemo(this,'direct')">🔗 Direct Link</div>
 </div>
 
-<!-- MAIN PLAYER CARD -->
-<section class="wrap">
+<section class="mwrap">
   <div class="card">
     <div class="ctop">
-      <div class="ctitle">🔗 Paste your video link</div>
-      <span class="dbadge" id="dbadge"></span>
+      <div class="ctitle">🔗 Paste your video link below</div>
+      <span class="dbdg" id="dbdg"></span>
     </div>
     <div class="cbody">
-      <!-- Input -->
       <div class="irow">
-        <input class="urlin" id="urlin" type="url" autocomplete="off" spellcheck="false"
-          placeholder="Paste TeraBox, MDisk, PDisk, Drive, Pixeldrain, YouTube or direct .mp4 link..."/>
-        <button class="playbtn" id="playbtn" onclick="go()">▶ Open Video</button>
+        <input class="ui" id="ui" type="url" autocomplete="off" spellcheck="false"
+          placeholder="Paste TeraBox, TeraShare, MDisk, PDisk, Drive, Pixeldrain, YouTube or .mp4 link..."/>
+        <button class="gbtn" id="gbtn" onclick="go()">▶ Open Video</button>
       </div>
 
-      <!-- Message bar -->
-      <div class="msgbar" id="msgbar"></div>
+      <div class="mbar" id="mbar"></div>
 
-      <!-- Video info row -->
       <div class="vinfo" id="vinfo">
-        <img class="vthumb" id="vthumb" src="" alt="" onerror="this.style.display='none'"/>
-        <div class="vmeta">
-          <div class="vtitle" id="vtitle"></div>
-          <div class="vsize" id="vsize"></div>
-        </div>
+        <img class="vt" id="vthumb" src="" alt="" onerror="this.style.display='none'"/>
+        <div class="vm"><div class="vn" id="vtitle"></div><div class="vs" id="vsize"></div></div>
       </div>
 
-      <!-- Action buttons -->
       <div class="arow" id="arow">
-        <a class="abtn dl" id="dlbtn" href="#" target="_blank" rel="noopener">⬇️ Download Video</a>
-        <button class="abtn cp" onclick="cpLink()">📋 Copy Link</button>
-        <button class="abtn op" id="opbtn" onclick="openInTab()" style="display:none">🔗 Open in Tab</button>
-        <button class="abtn cl" onclick="reset()">✕</button>
+        <a class="ab dl" id="dlbtn" href="#" target="_blank" download rel="noopener">⬇️ Download Video</a>
+        <button class="ab cp" onclick="cpLink()">📋 Copy Link</button>
+        <a class="ab ot" id="otbtn" href="#" target="_blank" rel="noopener" style="display:none">🔗 Open in Tab</a>
+        <button class="ab cl" onclick="doReset()">✕</button>
       </div>
 
-      <!-- Player area -->
-      <div class="pvwrap" id="pvwrap">
-        <div class="loadbox on" id="loadbox">
-          <div class="lring"></div>
-          <div class="ltxt" id="ltxt">Fetching video...</div>
-          <div class="lsub" id="lsub">Detecting platform</div>
+      <div class="pw" id="pw">
+        <div class="lb on" id="lb">
+          <div class="lr"></div>
+          <div class="lt" id="lt">Detecting platform...</div>
+          <div class="ls" id="ls">Please wait</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- STATS -->
 <div class="stats">
-  <div class="si"><div class="sn b">9+</div><div class="sl">Platforms</div></div>
+  <div class="si"><div class="sn b">10+</div><div class="sl">Platforms</div></div>
   <div class="si"><div class="sn g">0</div><div class="sl">Ads</div></div>
   <div class="si"><div class="sn b">∞</div><div class="sl">Videos</div></div>
   <div class="si"><div class="sn g">&lt;5s</div><div class="sl">Load Time</div></div>
   <div class="si"><div class="sn b">0</div><div class="sl">Login</div></div>
 </div>
 
-<!-- PLATFORMS -->
 <section class="sec">
-  <div class="shead">
-    <div class="sey">All Platforms</div>
-    <h2 class="stitle">Every Platform. One Tool.</h2>
-    <p class="ssub">No other tool covers all these platforms. This is your unfair advantage globally.</p>
-  </div>
+  <div class="sh"><div class="sey">All Platforms</div><h2 class="stl">Every Platform. One Tool.</h2><p class="ssb">No other tool covers all of these together. Worldwide support.</p></div>
   <div class="pgrid">
-    <div class="pc"><span class="pico">📦</span><div class="pname">TeraBox</div><div class="pdesc">Play + download TeraBox public share links instantly.</div><span class="pbadge bhot">Most Popular</span></div>
-    <div class="pc"><span class="pico">💿</span><div class="pname">MDisk</div><div class="pdesc">India's fastest growing video host — fully supported.</div><span class="pbadge bhot">Trending</span></div>
-    <div class="pc"><span class="pico">💾</span><div class="pname">PDisk</div><div class="pdesc">Open PDisk video links directly in browser.</div><span class="pbadge bnew">Supported</span></div>
-    <div class="pc"><span class="pico">🗂️</span><div class="pname">Google Drive</div><div class="pdesc">Play any public Google Drive video file.</div><span class="pbadge bpro">Global</span></div>
-    <div class="pc"><span class="pico">⚡</span><div class="pname">Pixeldrain</div><div class="pdesc">Western file host — direct CDN playback.</div><span class="pbadge bnew">New</span></div>
-    <div class="pc"><span class="pico">🎞️</span><div class="pname">Streamtape</div><div class="pdesc">Streamtape video playback with no redirect.</div><span class="pbadge bnew">New</span></div>
-    <div class="pc"><span class="pico">📁</span><div class="pname">Gofile</div><div class="pdesc">Play Gofile shared videos via official API.</div><span class="pbadge bnew">New</span></div>
-    <div class="pc"><span class="pico">▶️</span><div class="pname">YouTube</div><div class="pdesc">Clean distraction-free YouTube embed player.</div><span class="pbadge bpro">Bonus</span></div>
-    <div class="pc"><span class="pico">🔗</span><div class="pname">Direct Links</div><div class="pdesc">Any .mp4 .mkv .webm .m3u8 URL works instantly.</div><span class="pbadge bpro">Universal</span></div>
+    <div class="pc"><span class="pico">📦</span><div class="pn">TeraBox</div><div class="pd">Play public TeraBox share links in browser.</div><span class="pb hot">Most Popular</span></div>
+    <div class="pc"><span class="pico">🔷</span><div class="pn">TeraShare</div><div class="pd">terafileshare.com — same engine, full support.</div><span class="pb new_">New</span></div>
+    <div class="pc"><span class="pico">💿</span><div class="pn">MDisk</div><div class="pd">India's trending video host — play instantly.</div><span class="pb hot">Trending</span></div>
+    <div class="pc"><span class="pico">💾</span><div class="pn">PDisk</div><div class="pd">PDisk video links open directly.</div><span class="pb new_">Supported</span></div>
+    <div class="pc"><span class="pico">🗂️</span><div class="pn">Google Drive</div><div class="pd">Any public Drive video file plays instantly.</div><span class="pb pro">Global</span></div>
+    <div class="pc"><span class="pico">⚡</span><div class="pn">Pixeldrain</div><div class="pd">Direct CDN — play + download instantly.</div><span class="pb new_">Works</span></div>
+    <div class="pc"><span class="pico">🎞️</span><div class="pn">Streamtape</div><div class="pd">Streamtape video embed player.</div><span class="pb new_">Works</span></div>
+    <div class="pc"><span class="pico">📁</span><div class="pn">Gofile</div><div class="pd">Official Gofile API — video + download.</div><span class="pb new_">Works</span></div>
+    <div class="pc"><span class="pico">▶️</span><div class="pn">YouTube</div><div class="pd">Clean YouTube embed player, no ads.</div><span class="pb pro">Bonus</span></div>
+    <div class="pc"><span class="pico">🔗</span><div class="pn">Direct Links</div><div class="pd">Any .mp4 .mkv .webm .m3u8 URL.</div><span class="pb pro">Universal</span></div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
 <section class="sec">
-  <div class="shead">
-    <div class="sey">Simple Process</div>
-    <h2 class="stitle">3 Steps. That's It.</h2>
-    <p class="ssub">No setup. No account. Just paste and play.</p>
-  </div>
+  <div class="sh"><div class="sey">Simple Process</div><h2 class="stl">3 Steps. That's It.</h2></div>
   <div class="sgrid">
-    <div class="sti"><div class="scircle">1</div><div class="stname">Copy Your Link</div><p class="stdesc">Go to TeraBox, MDisk, PDisk or any supported platform. Copy the share link of your video.</p></div>
-    <div class="sti"><div class="scircle">2</div><div class="stname">Paste & Click</div><p class="stdesc">Paste the link above and click "Open Video". Platform is auto-detected instantly.</p></div>
-    <div class="sti"><div class="scircle">3</div><div class="stname">Watch or Download</div><p class="stdesc">Video plays in your browser. One-click download saves it offline on any device.</p></div>
+    <div class="sti"><div class="snum">1</div><div class="snm">Copy Your Link</div><p class="sds">Get the public share link from TeraBox, MDisk, PDisk or any supported platform.</p></div>
+    <div class="sti"><div class="snum">2</div><div class="snm">Paste & Click</div><p class="sds">Paste the link and hit "Open Video". Platform auto-detected instantly.</p></div>
+    <div class="sti"><div class="snum">3</div><div class="snm">Watch or Download</div><p class="sds">Video plays in browser. One-click download saves it offline.</p></div>
   </div>
 </section>
 
-<!-- FEATURES -->
 <section class="sec">
-  <div class="shead">
-    <div class="sey">Why VidLinkOpen</div>
-    <h2 class="stitle">Built Different</h2>
-    <p class="ssub">Every detail crafted for the best video experience.</p>
-  </div>
+  <div class="sh"><div class="sey">Why VidLinkOpen</div><h2 class="stl">Built Different</h2></div>
   <div class="fgrid">
-    <div class="fc c1"><div class="fline"></div><div class="ficon">⚡</div><div class="ftitle">Lightning Fast</div><p class="fdesc">Multiple API resolvers tried in parallel. Your video loads in under 5 seconds globally via CDN.</p></div>
-    <div class="fc c2"><div class="fline"></div><div class="ficon">🔒</div><div class="ftitle">100% Private</div><p class="fdesc">Zero data stored. We never log your links. All processing is stateless. No tracking ever.</p></div>
-    <div class="fc c3"><div class="fline"></div><div class="ficon">📱</div><div class="ftitle">All Devices</div><p class="fdesc">Android, iPhone, PC, tablet — works on every browser with no app installation needed.</p></div>
-    <div class="fc c4"><div class="fline"></div><div class="ficon">⬇️</div><div class="ftitle">Download Feature</div><p class="fdesc">Every video can be downloaded with one click. Save to your device for offline viewing anytime.</p></div>
-    <div class="fc c1"><div class="fline"></div><div class="ficon">🌍</div><div class="ftitle">Crash Proof</div><p class="fdesc">We never serve video files — just resolve links. 1 lakh users simultaneously = zero crashes.</p></div>
-    <div class="fc c2"><div class="fline"></div><div class="ficon">🚫</div><div class="ftitle">Zero Ads. Always.</div><p class="fdesc">No popups, no redirects, no banners. Clean, distraction-free video playback. Forever.</p></div>
+    <div class="fc c1"><div class="fln"></div><div class="fi">🔄</div><div class="ft">Multi-API Fallback</div><p class="fd">Multiple methods tried in sequence — if one fails, next auto-tries. Highest success rate.</p></div>
+    <div class="fc c2"><div class="fln"></div><div class="fi">⬇️</div><div class="ft">Download Any Video</div><p class="fd">Direct download button for every resolved video. Save to device with one click.</p></div>
+    <div class="fc c3"><div class="fln"></div><div class="fi">🌍</div><div class="ft">Global CDN</div><p class="fd">Hosted on Vercel — 150+ edge locations. Loads fast from India, US, Europe, anywhere.</p></div>
+    <div class="fc c4"><div class="fln"></div><div class="fi">📱</div><div class="ft">All Devices</div><p class="fd">Android, iPhone, PC, tablet. HLS streaming supported. No app install needed.</p></div>
   </div>
 </section>
 
-<!-- SEO CONTENT -->
-<div class="seotxt">
-  <h2>The World's Best Free Online Video Link Opener</h2>
-  <p>VidLinkOpen supports TeraBox, MDisk, PDisk, Google Drive, Pixeldrain, Streamtape, Gofile, YouTube and any direct video URL. No software, no registration, completely free. Works on all devices worldwide.</p>
-  <h2>Play TeraBox Videos Online Without App</h2>
-  <p>TeraBox offers 1TB free storage but requires an app to watch videos. VidLinkOpen bypasses this — paste any public TeraBox share link and it plays instantly in your browser, with direct download support.</p>
-  <h2>MDisk & PDisk Video Player Online Free</h2>
-  <p>MDisk and PDisk are India's fastest growing video hosting platforms. VidLinkOpen fully supports both — watch MDisk and PDisk videos online instantly without any app or account login required.</p>
-  <h2>Pixeldrain, Streamtape & Gofile Player</h2>
-  <p>VidLinkOpen also supports western platforms like Pixeldrain, Streamtape and Gofile used widely in Europe and the US. One tool covers the entire world's video hosting ecosystem.</p>
+<div class="seo">
+  <h2>Free Online Video Link Opener — All Platforms</h2>
+  <p>VidLinkOpen supports TeraBox, TeraShare (terafileshare.com), MDisk, PDisk, Google Drive, Pixeldrain, Streamtape, Gofile, YouTube and any direct video URL. No software, no account, 100% free forever.</p>
+  <h2>TeraBox & TeraShare Video Player Online</h2>
+  <p>Both TeraBox and TeraShare share the same infrastructure. Paste any public share link (terabox.com/s/XXXX or terafileshare.com/s/XXXX) and watch or download instantly — no app needed.</p>
+  <h2>MDisk & PDisk Online Player Free</h2>
+  <p>India's fastest-growing video hosting platforms are fully supported. VidLinkOpen extracts the direct stream URL so you can watch without any app or login.</p>
 </div>
 
-<!-- FAQ -->
 <section class="sec">
-  <div class="shead">
-    <div class="sey">FAQ</div>
-    <h2 class="stitle">Frequently Asked Questions</h2>
-  </div>
-  <div id="faqlist">
-    <div class="faqitem"><button class="faqbtn" onclick="faq(this)">Is VidLinkOpen completely free?<span class="faqico">▾</span></button><div class="faqans"><p>Yes, 100% free forever. No hidden fees, no premium plan, no credit card. Just paste and play.</p></div></div>
-    <div class="faqitem"><button class="faqbtn" onclick="faq(this)">Why is my TeraBox link not working?<span class="faqico">▾</span></button><div class="faqans"><p>Only public share links work. Private files need login and cannot be accessed by any tool. Make sure your link is a public share link — usually format: terabox.com/s/XXXXXXX</p></div></div>
-    <div class="faqitem"><button class="faqbtn" onclick="faq(this)">Can 1 lakh users use this simultaneously?<span class="faqico">▾</span></button><div class="faqans"><p>Yes! VidLinkOpen uses serverless architecture — we never store or serve video files, just resolve links. The site scales to infinite users without crashing.</p></div></div>
-    <div class="faqitem"><button class="faqbtn" onclick="faq(this)">How do I download the video?<span class="faqico">▾</span></button><div class="faqans"><p>After video loads, click the "Download Video" button. For some platforms it opens the direct file URL — right-click and "Save As" to download. For others a direct download starts automatically.</p></div></div>
-    <div class="faqitem"><button class="faqbtn" onclick="faq(this)">Does it work on mobile?<span class="faqico">▾</span></button><div class="faqans"><p>Absolutely. Fully responsive and tested on Android Chrome, Safari iOS, and all major mobile browsers. No app needed.</p></div></div>
-    <div class="faqitem"><button class="faqbtn" onclick="faq(this)">What video formats are supported?<span class="faqico">▾</span></button><div class="faqans"><p>MP4, MKV, WebM, M3U8 (HLS streaming), AVI, MOV and more. HLS streams play via HLS.js library built into the site.</p></div></div>
-  </div>
+  <div class="sh"><div class="sey">FAQ</div><h2 class="stl">Common Questions</h2></div>
+  <div class="faqitem"><button class="faqbtn" onclick="faq(this)">Why is my TeraBox link not working?<span class="faqico">▾</span></button><div class="faqans"><p>Only public share links work. Link must be format: terabox.com/s/XXXXXX — generated via "Share" button. Private files, login-required files, and expired links cannot be opened by any tool.</p></div></div>
+  <div class="faqitem"><button class="faqbtn" onclick="faq(this)">Does it support terafileshare.com (TeraShare)?<span class="faqico">▾</span></button><div class="faqans"><p>Yes! TeraShare uses identical infrastructure to TeraBox. Paste any terafileshare.com/s/XXXXX link and it works exactly like TeraBox.</p></div></div>
+  <div class="faqitem"><button class="faqbtn" onclick="faq(this)">How to download the video after it loads?<span class="faqico">▾</span></button><div class="faqans"><p>Click the "⬇️ Download Video" button. For most platforms this triggers a direct file download. For iframe embeds (MDisk/PDisk), right-click the video player and select "Save Video As".</p></div></div>
+  <div class="faqitem"><button class="faqbtn" onclick="faq(this)">Is it free forever?<span class="faqico">▾</span></button><div class="faqans"><p>Yes. 100% free, no premium plan, no hidden fees, no credit card. Just paste and play.</p></div></div>
+  <div class="faqitem"><button class="faqbtn" onclick="faq(this)">Why does TeraBox show "embed mode"?<span class="faqico">▾</span></button><div class="faqans"><p>When the direct stream URL can't be extracted, we fall back to TeraBox's official embed player. The video still plays — just inside TeraBox's own iframe. Download link opens the share page.</p></div></div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <div class="fi">
+  <div class="fi2">
     <div class="ftop">
-      <div class="fbrand">
-        <div class="logo"><span class="v">Vid</span><span class="l">Link</span><span class="o">Open</span></div>
-        <p>The world's most complete free video link opener. TeraBox, MDisk, PDisk, Drive, Pixeldrain and more — all in one place.</p>
+      <div>
+        <a class="logo" href="/"><span class="lv">Vid</span><span class="ll">Link</span><span class="lo">Open</span></a>
+        <p class="fbp">The world's most complete free video link opener. All platforms. One tool. Zero ads.</p>
       </div>
       <div class="flg">
         <h4>Players</h4>
-        <a href="#">TeraBox Player</a>
-        <a href="#">MDisk Player</a>
-        <a href="#">PDisk Player</a>
-        <a href="#">Pixeldrain Player</a>
-        <a href="#">Google Drive Player</a>
+        <a href="#">TeraBox Player</a><a href="#">TeraShare Player</a>
+        <a href="#">MDisk Player</a><a href="#">PDisk Player</a><a href="#">Pixeldrain Player</a>
       </div>
       <div class="flg">
         <h4>Pages</h4>
-        <a href="#">About Us</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Contact</a>
-        <a href="#">Blog</a>
+        <a href="#">About Us</a><a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a><a href="#">Contact</a><a href="#">Blog</a>
       </div>
     </div>
     <div class="fbot">
@@ -407,558 +329,514 @@ footer{position:relative;z-index:1;background:var(--bg2);border-top:1px solid va
   </div>
 </footer>
 
-<!-- Schema.org SEO -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"VidLinkOpen","url":"https://vidlinkopen.com","description":"Free online video link opener for TeraBox, MDisk, PDisk, Google Drive, Pixeldrain, Streamtape, Gofile and YouTube.","applicationCategory":"MultimediaApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["TeraBox video player","MDisk video player","PDisk video player","Google Drive video player","Pixeldrain player","Streamtape player","Gofile player","YouTube player","Direct video link player","Video download"]}
+{"@context":"https://schema.org","@type":"WebApplication","name":"VidLinkOpen","url":"https://vidlinkopen.com","description":"Free video link opener for TeraBox, TeraShare, MDisk, PDisk, Google Drive, Pixeldrain, Streamtape, Gofile, YouTube.","applicationCategory":"MultimediaApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
 
 <script>
-// ═══════════════════════════════════════════════════════════════
-//  VidLinkOpen — Complete Video Engine
-//  All platform resolvers with working APIs + proper fallbacks
-// ═══════════════════════════════════════════════════════════════
+// ╔══════════════════════════════════════════════════════════════════╗
+// ║  VidLinkOpen — Complete Video Engine                            ║
+// ║  IMPORTANT: ALL calls here use CORS-friendly methods:           ║
+// ║   • Direct embeds (iframe) — no CORS issue                      ║
+// ║   • APIs that return Access-Control-Allow-Origin: *             ║
+// ║   • Direct CDN URLs (video tag src)                             ║
+// ║  This file works standalone WITHOUT any backend server          ║
+// ╚══════════════════════════════════════════════════════════════════╝
 
-let _directUrl = '';
-let _hlsInstance = null;
+let _DL = ''; // current download URL
+let _HLS = null;
 
-// ─── Platform Detection ──────────────────────────────────────────────
-const P_LABELS = {
-  terabox:'📦 TeraBox', mdisk:'💿 MDisk', pdisk:'💾 PDisk',
-  gdrive:'🗂️ Google Drive', pixeldrain:'⚡ Pixeldrain',
-  streamtape:'🎞️ Streamtape', gofile:'📁 Gofile',
-  youtube:'▶️ YouTube', direct:'🔗 Direct Link'
+// ── DETECT PLATFORM ───────────────────────────────────────────────────
+const LBL = {
+  terabox:'📦 TeraBox', terashare:'🔷 TeraShare', mdisk:'💿 MDisk', pdisk:'💾 PDisk',
+  gdrive:'🗂️ Google Drive', pixeldrain:'⚡ Pixeldrain', streamtape:'🎞️ Streamtape',
+  gofile:'📁 Gofile', youtube:'▶️ YouTube', direct:'🔗 Direct Link'
 };
 
 function detect(u) {
   if (!u) return null;
-  u = u.toLowerCase();
-  if (/\.(mp4|webm|mkv|avi|mov|m3u8|ts|ogg|flv)(\?|#|$)/i.test(u)) return 'direct';
-  if (/terabox\.com|1024terabox|teraboxapp|freeterabox|nephobox|4funbox|terabox\.app/i.test(u)) return 'terabox';
-  if (/mdisk\.me/i.test(u)) return 'mdisk';
-  if (/pdisk\.(me|vip|in)/i.test(u)) return 'pdisk';
-  if (/drive\.google\.com/i.test(u)) return 'gdrive';
-  if (/pixeldrain\.com/i.test(u)) return 'pixeldrain';
-  if (/streamtape\.(com|net)/i.test(u)) return 'streamtape';
-  if (/gofile\.io/i.test(u)) return 'gofile';
-  if (/youtube\.com|youtu\.be/i.test(u)) return 'youtube';
+  const l = u.toLowerCase();
+  if (/\.(mp4|webm|mkv|avi|mov|m3u8|ts|ogg)(\?|#|$)/i.test(l)) return 'direct';
+  if (/terafileshare\.com|terashare\.(in|net|com)/i.test(l))     return 'terashare';
+  if (/terabox\.com|1024terabox|teraboxapp|freeterabox|nephobox|4funbox/i.test(l)) return 'terabox';
+  if (/mdisk\.me/i.test(l))                  return 'mdisk';
+  if (/pdisk\.(me|vip|in)/i.test(l))         return 'pdisk';
+  if (/drive\.google\.com/i.test(l))         return 'gdrive';
+  if (/pixeldrain\.com/i.test(l))            return 'pixeldrain';
+  if (/streamtape\.(com|net)/i.test(l))      return 'streamtape';
+  if (/gofile\.io/i.test(l))                 return 'gofile';
+  if (/youtube\.com|youtu\.be/i.test(l))     return 'youtube';
   return 'unknown';
 }
 
-// Live input detection
-document.getElementById('urlin').addEventListener('input', function() {
-  const p = detect(this.value);
-  const b = document.getElementById('dbadge');
-  if (p && p !== 'unknown' && this.value.trim()) {
-    b.textContent = P_LABELS[p] || '🔗 Link Detected';
-    b.classList.add('on');
-  } else b.classList.remove('on');
+// live badge
+const $inp = document.getElementById('ui');
+$inp.addEventListener('input', function() {
+  const p = detect(this.value), b = document.getElementById('dbdg');
+  if (p && p !== 'unknown' && this.value.trim()) { b.textContent = LBL[p]||'🔗'; b.classList.add('on'); }
+  else b.classList.remove('on');
 });
+$inp.addEventListener('keydown', e => { if(e.key==='Enter') go(); });
+$inp.addEventListener('paste', () => setTimeout(go, 280));
 
-document.getElementById('urlin').addEventListener('keydown', e => {
-  if (e.key === 'Enter') go();
-});
-
-document.getElementById('urlin').addEventListener('paste', () => setTimeout(go, 220));
-
-function tabClick(el, type) {
-  document.querySelectorAll('.ptab').forEach(t => t.classList.remove('on'));
+// tab demo
+function tabDemo(el, t) {
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
   el.classList.add('on');
   const demos = {
-    terabox:'https://www.terabox.com/s/your-public-share-link',
-    mdisk:'https://mdisk.me/FILEID',
-    pdisk:'https://pdisk.me/FILEID',
-    gdrive:'https://drive.google.com/file/d/FILE_ID/view?usp=sharing',
-    pixeldrain:'https://pixeldrain.com/u/FILE_ID',
-    streamtape:'https://streamtape.com/v/VIDEO_ID',
-    gofile:'https://gofile.io/d/CONTENT_ID',
-    youtube:'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    direct:'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+    terabox:    'https://www.terabox.com/s/YOUR_PUBLIC_SHARE_CODE',
+    terashare:  'https://www.terafileshare.com/s/YOUR_SHARE_CODE',
+    mdisk:      'https://mdisk.me/YOUR_FILE_ID',
+    pdisk:      'https://pdisk.me/YOUR_FILE_ID',
+    gdrive:     'https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing',
+    pixeldrain: 'https://pixeldrain.com/u/YOUR_FILE_ID',
+    streamtape: 'https://streamtape.com/v/YOUR_VIDEO_ID',
+    gofile:     'https://gofile.io/d/YOUR_CONTENT_ID',
+    youtube:    'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    direct:     'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
   };
-  const inp = document.getElementById('urlin');
-  inp.value = demos[type] || '';
-  inp.dispatchEvent(new Event('input'));
-  inp.focus();
+  $inp.value = demos[t] || '';
+  $inp.dispatchEvent(new Event('input'));
+  $inp.focus();
 }
 
-// ─── UI Helpers ───────────────────────────────────────────────────────
-function msg(txt, type = 'i') {
-  const el = document.getElementById('msgbar');
-  const ic = { e:'❌', i:'ℹ️', s:'✅', w:'⚠️' };
-  el.className = `msgbar on ${type}`;
-  el.innerHTML = `<span style="flex-shrink:0;font-size:1rem">${ic[type]||'ℹ️'}</span><span>${txt}</span>`;
+// ── UI HELPERS ────────────────────────────────────────────────────────
+function setMsg(html, t='i') {
+  const ic = {e:'❌',i:'ℹ️',s:'✅',w:'⚠️'};
+  const el = document.getElementById('mbar');
+  el.className = `mbar on ${t}`;
+  el.innerHTML = `<span style="flex-shrink:0;font-size:1rem">${ic[t]}</span><span>${html}</span>`;
 }
-function hideMsg() { document.getElementById('msgbar').className = 'msgbar'; }
+const hideMsg = () => document.getElementById('mbar').className = 'mbar';
 
-function setLoad(on, txt='Fetching video...', sub='Please wait') {
-  const lb = document.getElementById('loadbox');
-  document.getElementById('ltxt').textContent = txt;
-  document.getElementById('lsub').textContent = sub;
-  lb.className = on ? 'loadbox on' : 'loadbox';
+function setLoad(on, txt='Fetching...', sub='Please wait') {
+  document.getElementById('lt').textContent = txt;
+  document.getElementById('ls').textContent = sub;
+  document.getElementById('lb').className = on ? 'lb on' : 'lb';
 }
 
-function showWrap() {
-  const w = document.getElementById('pvwrap');
-  w.className = 'pvwrap on';
-  // Make sure loadbox shows inside
-  if (!document.getElementById('loadbox')) {
-    w.innerHTML = `<div class="loadbox on" id="loadbox">
-      <div class="lring"></div>
-      <div class="ltxt" id="ltxt">Fetching video...</div>
-      <div class="lsub" id="lsub">Please wait</div>
-    </div>`;
+function openPW() {
+  const w = document.getElementById('pw');
+  w.className = 'pw on';
+  if (!document.getElementById('lb')) {
+    w.innerHTML = `<div class="lb on" id="lb"><div class="lr"></div><div class="lt" id="lt">Loading...</div><div class="ls" id="ls">Please wait</div></div>`;
   }
+  setLoad(true);
 }
 
 function setPlayer(html) {
-  if (_hlsInstance) { _hlsInstance.destroy(); _hlsInstance = null; }
-  const w = document.getElementById('pvwrap');
-  w.className = 'pvwrap on';
+  if (_HLS) { _HLS.destroy(); _HLS = null; }
+  const w = document.getElementById('pw');
+  w.className = 'pw on';
   w.innerHTML = html;
 }
 
-function showActions(url, showDL = true) {
-  _directUrl = url || '';
+function setActions(dlUrl, tabUrl) {
+  _DL = dlUrl || tabUrl || '';
   document.getElementById('arow').className = 'arow on';
-  const dl = document.getElementById('dlbtn');
-  const op = document.getElementById('opbtn');
-  if (url && showDL) {
-    dl.href = url;
-    dl.setAttribute('download', '');
-    dl.style.display = 'flex';
-    op.style.display = 'flex';
-  } else {
-    dl.style.display = 'none';
-    op.style.display = 'none';
-  }
+  const dl  = document.getElementById('dlbtn');
+  const tab = document.getElementById('otbtn');
+  if (dlUrl) { dl.href = dlUrl; dl.style.display='flex'; }
+  else dl.style.display='none';
+  if (tabUrl) { tab.href = tabUrl; tab.style.display='flex'; }
+  else tab.style.display='none';
 }
 
-function showInfo(title, size, thumb) {
+function setInfo(title, size, thumb) {
   if (!title && !thumb) return;
-  document.getElementById('vtitle').textContent = title || '';
-  document.getElementById('vsize').textContent = size || '';
+  document.getElementById('vtitle').textContent = title||'';
+  document.getElementById('vsize').textContent  = size||'';
   const t = document.getElementById('vthumb');
-  if (thumb) { t.src = thumb; t.style.display = 'block'; }
-  else t.style.display = 'none';
+  t.src = thumb||''; t.style.display = thumb ? 'block':'none';
   document.getElementById('vinfo').className = 'vinfo on';
 }
 
 function cpLink() {
-  const u = _directUrl || document.getElementById('urlin').value.trim();
+  const u = _DL || $inp.value.trim();
   if (!u) return;
-  navigator.clipboard.writeText(u).then(() => msg('Link copied to clipboard!', 's'))
-    .catch(() => { /* fallback */ });
+  navigator.clipboard.writeText(u).then(() => setMsg('Link copied!','s')).catch(()=>{});
 }
 
-function openInTab() {
-  if (_directUrl) window.open(_directUrl, '_blank');
-}
-
-function setBtnLoading(on) {
-  const b = document.getElementById('playbtn');
+function setBusy(on) {
+  const b = document.getElementById('gbtn');
   b.disabled = on;
   b.innerHTML = on ? '⏳ Opening...' : '▶ Open Video';
 }
 
-function reset() {
-  if (_hlsInstance) { _hlsInstance.destroy(); _hlsInstance = null; }
-  document.getElementById('pvwrap').className = 'pvwrap';
-  document.getElementById('pvwrap').innerHTML = `<div class="loadbox on" id="loadbox">
-    <div class="lring"></div>
-    <div class="ltxt" id="ltxt">Fetching video...</div>
-    <div class="lsub" id="lsub">Detecting platform</div>
-  </div>`;
+function doReset() {
+  if (_HLS) { _HLS.destroy(); _HLS=null; }
+  document.getElementById('pw').className = 'pw';
+  document.getElementById('pw').innerHTML = `<div class="lb on" id="lb"><div class="lr"></div><div class="lt" id="lt">Detecting...</div><div class="ls" id="ls">Please wait</div></div>`;
   document.getElementById('arow').className = 'arow';
-  document.getElementById('msgbar').className = 'msgbar';
+  document.getElementById('mbar').className = 'mbar';
   document.getElementById('vinfo').className = 'vinfo';
-  document.getElementById('urlin').value = '';
-  document.getElementById('dbadge').classList.remove('on');
-  document.querySelectorAll('.ptab').forEach(t => t.classList.remove('on'));
-  _directUrl = '';
+  $inp.value = ''; document.getElementById('dbdg').classList.remove('on');
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  _DL = '';
 }
 
-// ─── Video Player with HLS Support ───────────────────────────────────
-function playVideo(url, autoplay = true) {
-  const isHLS = /\.m3u8/i.test(url);
+// ── VIDEO PLAYER (HTML5 + HLS) ────────────────────────────────────────
+function playV(src, mime) {
+  if (_HLS) { _HLS.destroy(); _HLS=null; }
+  const isHLS = /\.m3u8/i.test(src);
   if (isHLS && typeof Hls !== 'undefined' && Hls.isSupported()) {
-    setPlayer(`<video id="hlsvid" controls ${autoplay?'autoplay':''} style="width:100%;max-height:490px;background:#000;display:block"></video>`);
-    const vid = document.getElementById('hlsvid');
-    _hlsInstance = new Hls({ enableWorker: true });
-    _hlsInstance.loadSource(url);
-    _hlsInstance.attachMedia(vid);
-    _hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => { if(autoplay) vid.play().catch(()=>{}); });
+    setPlayer(`<video id="hv" controls autoplay playsinline style="width:100%;max-height:500px;background:#000;display:block"></video>`);
+    const v = document.getElementById('hv');
+    _HLS = new Hls({ enableWorker:true, lowLatencyMode:false });
+    _HLS.loadSource(src);
+    _HLS.attachMedia(v);
+    _HLS.on(Hls.Events.MANIFEST_PARSED, ()=>v.play().catch(()=>{}));
+    _HLS.on(Hls.Events.ERROR, (_,d) => { if(d.fatal) { setMsg('HLS error. Try opening in new tab.','w'); } });
   } else {
-    setPlayer(`<video controls ${autoplay?'autoplay':''} style="width:100%;max-height:490px;background:#000;display:block">
-      <source src="${url}" type="${isHLS?'application/x-mpegURL':'video/mp4'}">
-      Your browser does not support HTML5 video. <a href="${url}" target="_blank">Click here to watch</a>
+    const m = mime || (isHLS ? 'application/x-mpegURL' : 'video/mp4');
+    setPlayer(`<video controls autoplay playsinline style="width:100%;max-height:500px;background:#000;display:block">
+      <source src="${esc(src)}" type="${m}">
+      <source src="${esc(src)}">
+      <p style="color:#fff;padding:20px;text-align:center">
+        Cannot play inline. <a href="${esc(src)}" target="_blank" style="color:var(--acc)">Click here to open video ↗</a>
+      </p>
     </video>`);
   }
 }
+function esc(s){ return s.replace(/"/g,'&quot;'); }
+function fmtSz(b){ if(!b) return ''; const m=b/1048576; return m>1024?`${(m/1024).toFixed(1)} GB`:`${m.toFixed(1)} MB`; }
 
-// ─── TERABOX Resolver ─────────────────────────────────────────────────
-// Uses 3 methods: savetube API → Official TeraBox embed → Error
-async function playTerabox(url) {
-  showWrap(); setLoad(true, 'Resolving TeraBox link...', 'Method 1/3');
-  msg('Fetching TeraBox video stream (may take 5-8 sec)...', 'i');
+// ══════════════════════════════════════════════════════════════════════
+//  PLATFORM RESOLVERS
+// ══════════════════════════════════════════════════════════════════════
 
-  // Extract surl (short code) from the URL
-  const surlMatch = url.match(/\/s\/([a-zA-Z0-9_-]+)/);
-  const surl = surlMatch ? surlMatch[1] : null;
+// ── 1. TERABOX + TERASHARE ────────────────────────────────────────────
+// Uses savetube.me API which has CORS enabled (Access-Control-Allow-Origin: *)
+async function doTera(url) {
+  openPW(); setLoad(true,'Connecting to TeraBox resolver...','Method 1 of 3');
+  setMsg('Fetching video stream (10–15 sec first time)...','i');
 
-  // ── Method 1: savetube.me API (most reliable, has CORS) ───────────
+  // Extract surl for embed fallback
+  const sm = url.match(/\/s\/([A-Za-z0-9_-]+)/) || url.match(/surl=([A-Za-z0-9_-]+)/);
+  const surl = sm ? sm[1] : null;
+  const isTS = /terafileshare|terashare/i.test(url);
+  const host = isTS ? 'www.terafileshare.com' : 'www.terabox.com';
+
+  // ── Method 1: savetube API (CORS: * — works from browser) ──────────
+  setLoad(true,'Calling savetube resolver...','CORS-enabled API');
   try {
-    setLoad(true, 'Connecting to resolver API...', 'Trying method 1/3');
-    const resp = await fetch('https://ytshorts.savetube.me/api/v1/terabox-downloader', {
+    const r = await fetch('https://ytshorts.savetube.me/api/v1/terabox-downloader', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'User-Agent': 'Mozilla/5.0',
-        'Origin': 'https://ytshorts.savetube.me',
         'Referer': 'https://ytshorts.savetube.me/',
+        'Origin': 'https://ytshorts.savetube.me',
       },
       body: JSON.stringify({ url }),
-      signal: AbortSignal.timeout(12000),
+      signal: AbortSignal.timeout(20000),
     });
-
-    if (resp.ok) {
-      const data = await resp.json();
-      const res = data?.response?.[0];
-      if (res) {
-        const hdUrl = res?.resolutions?.['HD Video'] || res?.resolutions?.['Fast Download'];
-        const dlUrl = res?.resolutions?.['Fast Download'] || hdUrl;
-        const title = res?.title || res?.filename || 'TeraBox Video';
-        const thumb = res?.thumbnail;
-
-        if (hdUrl) {
-          setLoad(false);
-          hideMsg();
-          showInfo(title, null, thumb);
-          playVideo(hdUrl);
-          showActions(dlUrl || hdUrl);
-          msg('TeraBox video loaded! 🎉', 's');
+    if (r.ok) {
+      const d = await r.json();
+      const item = d?.response?.[0];
+      if (item) {
+        const hd   = item.resolutions?.['HD Video'];
+        const fast = item.resolutions?.['Fast Download'];
+        const vurl = hd || fast;
+        if (vurl?.startsWith('http')) {
+          setLoad(false); hideMsg();
+          setInfo(item.title||item.filename||'TeraBox Video', null, item.thumbnail||null);
+          playV(vurl);
+          setActions(fast||vurl, vurl);
+          setMsg('Video loaded successfully! 🎉','s');
           return;
         }
       }
     }
-  } catch(e) { /* try next */ }
+  } catch(e) { console.log('[savetube]', e.message); }
 
-  // ── Method 2: TeraBox official embed ──────────────────────────────
-  if (surl) {
-    setLoad(true, 'Trying official TeraBox embed...', 'Method 2/3');
-    try {
-      const embedUrl = `https://www.terabox.com/sharing/embed?surl=${surl}&resolution=720&autoplay=true&mute=false`;
-      setLoad(false);
-      hideMsg();
-      setPlayer(`<iframe src="${embedUrl}" allow="autoplay;fullscreen" allowfullscreen
-        style="width:100%;height:420px;border:none;display:block"
-        onload="this.style.opacity='1'" style="opacity:0;transition:opacity .3s"></iframe>`);
-      // For TeraBox embed, download via different URL
-      const dlUrl = `https://www.terabox.com/sharing/link?surl=${surl}`;
-      showActions(dlUrl, true);
-      msg('TeraBox video loaded via embed! ✅', 's');
-      return;
-    } catch(e) { /* try next */ }
-  }
-
-  // ── Method 3: Try third-party API ──────────────────────────────────
-  setLoad(true, 'Trying alternate resolver...', 'Method 3/3');
-  const altApis = [
-    `https://terabox.hnn.workers.dev/?url=${encodeURIComponent(url)}`,
-    `https://teradownload.vercel.app/api?url=${encodeURIComponent(url)}`,
-  ];
-
-  for (const api of altApis) {
-    try {
-      const r = await fetch(api, { signal: AbortSignal.timeout(8000) });
-      if (!r.ok) continue;
-      const d = await r.json();
-      const vurl = d?.url || d?.downloadUrl || d?.dlink || d?.direct_link || d?.link;
-      if (vurl?.startsWith('http')) {
-        setLoad(false);
-        hideMsg();
-        playVideo(vurl);
-        showActions(vurl);
-        msg('TeraBox video loaded!', 's');
-        return;
-      }
-    } catch(e) {}
-  }
-
-  // All methods failed
-  setLoad(false);
-  document.getElementById('pvwrap').className = 'pvwrap';
-  msg(`<strong>Could not load this TeraBox link.</strong><br>
-  ✅ Make sure the link is a <strong>public share link</strong><br>
-  ✅ Format must be: <code>terabox.com/s/XXXXXX</code><br>
-  ❌ Private/expired links cannot be opened by any tool`, 'w');
-}
-
-// ─── MDISK Resolver ───────────────────────────────────────────────────
-async function playMdisk(url) {
-  const m = url.match(/mdisk\.me\/([a-zA-Z0-9]+)/i);
-  if (!m) { msg('Invalid MDisk URL. Format should be: mdisk.me/XXXXX', 'e'); return; }
-  const id = m[1];
-
-  showWrap(); setLoad(true, 'Resolving MDisk stream...', 'Calling MDisk CDN API');
-
-  // Try official MDisk CDN API
+  // ── Method 2: terabox-api.vercel.app (CORS: *) ────────────────────
+  setLoad(true,'Trying alternate resolver...','Method 2 of 3');
   try {
-    const resp = await fetch(`https://diskuploader.entertainvideo.com/v1/file/cdnurl?param=${id}`, {
-      signal: AbortSignal.timeout(10000),
-      headers: { 'Accept': 'application/json' }
+    const r2 = await fetch(`https://terabox-api.vercel.app/api?url=${encodeURIComponent(url)}`, {
+      signal: AbortSignal.timeout(12000),
     });
-    if (resp.ok) {
-      const d = await resp.json();
-      // API returns {source: [{file: "url", label: "Auto"}]}
-      const src = d?.source?.[0]?.file || d?.url || d?.cdn_url || d?.stream_url;
-      if (src?.startsWith('http')) {
+    if (r2.ok) {
+      const d2 = await r2.json();
+      const vurl = d2?.downloadURL || d2?.url || d2?.directLink || d2?.dlink;
+      if (vurl?.startsWith('http')) {
         setLoad(false); hideMsg();
-        showInfo(d?.title || d?.name || 'MDisk Video', null, d?.poster || d?.thumbnail);
-        playVideo(src);
-        showActions(src);
-        msg('MDisk video loaded!', 's');
+        setInfo(d2.title||'TeraBox Video', null, d2.thumbnail||null);
+        playV(vurl);
+        setActions(vurl, vurl);
+        setMsg('TeraBox video loaded! ✅','s');
         return;
       }
     }
-  } catch(e) {}
+  } catch(e) { console.log('[tera-alt]', e.message); }
 
-  // Fallback: embed iframe
-  setLoad(false); hideMsg();
-  const embedUrls = [
-    `https://mdisk.me/video/${id}`,
-    `https://mdisk.me/embed/${id}`,
-    `https://mdisk.me/${id}`,
-  ];
-  setPlayer(`<iframe src="${embedUrls[0]}"
-    allow="autoplay;fullscreen" allowfullscreen
-    style="width:100%;height:420px;border:none;display:block"></iframe>`);
-  showActions(`https://mdisk.me/${id}`, false);
-  msg('MDisk video loaded (embed mode). If blank — link may be expired.', 's');
+  // ── Method 3: Official embed fallback ─────────────────────────────
+  setLoad(true,'Loading embed player...','Method 3 of 3');
+  if (surl) {
+    setLoad(false); hideMsg();
+    const embedUrl = `https://${host}/sharing/embed?surl=${surl}&resolution=720&autoplay=true&mute=0`;
+    setPlayer(`<iframe src="${embedUrl}"
+      allow="autoplay; fullscreen" allowfullscreen
+      style="width:100%;height:440px;border:none;display:block;background:#000">
+    </iframe>`);
+    setActions(null, url);
+    setMsg('Loaded via official embed player ✅  (For download: click "Open in Tab" then download from there)','s');
+    return;
+  }
+
+  // Total failure
+  setLoad(false);
+  document.getElementById('pw').className='pw';
+  setMsg(`<strong>Cannot open this link.</strong><br>
+    ✅ Must be a <b>public share link</b> — format: <code>terabox.com/s/XXXXX</code><br>
+    ✅ Generate via TeraBox → Share → Copy Link<br>
+    ❌ Private links, login-required files, expired links = not openable by any tool`,'w');
 }
 
-// ─── PDISK Resolver ───────────────────────────────────────────────────
-async function playPdisk(url) {
-  const m = url.match(/pdisk\.(?:me|vip|in)\/([a-zA-Z0-9]+)/i);
-  if (!m) { msg('Invalid PDisk URL. Format: pdisk.me/XXXXX', 'e'); return; }
+// ── 2. MDISK ──────────────────────────────────────────────────────────
+// entertainvideo CDN API has CORS: * → works from browser directly
+async function doMdisk(url) {
+  const m = url.match(/mdisk\.me\/([A-Za-z0-9]+)/i);
+  if (!m) { setMsg('Invalid MDisk URL. Format: mdisk.me/XXXXX','e'); return; }
   const id = m[1];
+  openPW(); setLoad(true,'Calling MDisk CDN API...','CORS-enabled');
 
-  showWrap(); setLoad(true, 'Resolving PDisk stream...', 'Connecting');
-
-  // Try PDisk direct API
   try {
-    const resp = await fetch(`https://pdisk.me/api/file/${id}`, {
-      signal: AbortSignal.timeout(8000),
-      headers: { 'Accept': 'application/json' }
+    const r = await fetch(`https://diskuploader.entertainvideo.com/v1/file/cdnurl?param=${id}`, {
+      headers: { Accept:'application/json' },
+      signal: AbortSignal.timeout(12000),
     });
-    if (resp.ok) {
-      const d = await resp.json();
+    if (r.ok) {
+      const d = await r.json();
+      // response: { source:[{file:"https://cdn.../file.mp4", label:"Auto"}] }
+      const src = d?.source?.[0]?.file || d?.url || d?.cdn_url;
+      if (src?.startsWith('http')) {
+        setLoad(false); hideMsg();
+        setInfo(d?.title||d?.name||'MDisk Video', null, d?.poster||d?.thumbnail||null);
+        playV(src);
+        setActions(src, src);
+        setMsg('MDisk video loaded! ✅','s');
+        return;
+      }
+    }
+  } catch(e) { console.log('[mdisk-api]', e.message); }
+
+  // Embed fallback
+  setLoad(false); hideMsg();
+  const embeds = [`https://mdisk.me/video/${id}`, `https://mdisk.me/embed/${id}`];
+  setPlayer(`<iframe src="${embeds[0]}" allow="autoplay;fullscreen" allowfullscreen
+    style="width:100%;height:440px;border:none;display:block;background:#000"
+    onerror="this.src='${embeds[1]}'"></iframe>`);
+  setActions(null, url);
+  setMsg('MDisk loaded (embed mode). If blank — link may be expired or private.','s');
+}
+
+// ── 3. PDISK ──────────────────────────────────────────────────────────
+async function doPdisk(url) {
+  const m = url.match(/pdisk\.(?:me|vip|in)\/([A-Za-z0-9]+)/i);
+  if (!m) { setMsg('Invalid PDisk URL. Format: pdisk.me/XXXXX','e'); return; }
+  const id = m[1];
+  openPW(); setLoad(true,'Loading PDisk video...','Checking API');
+
+  // Try API
+  try {
+    const r = await fetch(`https://pdisk.me/api/file/${id}`, {
+      headers:{Accept:'application/json'}, signal:AbortSignal.timeout(10000)
+    });
+    if (r.ok) {
+      const d = await r.json();
       const src = d?.url || d?.stream_url || d?.cdn_url;
       if (src?.startsWith('http')) {
         setLoad(false); hideMsg();
-        showInfo(d?.title || 'PDisk Video', null, d?.thumbnail);
-        playVideo(src);
-        showActions(src);
-        msg('PDisk video loaded!', 's');
+        setInfo(d?.title||'PDisk Video', null, d?.thumbnail||null);
+        playV(src);
+        setActions(src, src);
+        setMsg('PDisk video loaded! ✅','s');
         return;
       }
     }
   } catch(e) {}
 
-  // Fallback embed
+  // Embed fallback
   setLoad(false); hideMsg();
-  setPlayer(`<iframe src="https://pdisk.me/embed/${id}"
-    allow="autoplay;fullscreen" allowfullscreen
-    style="width:100%;height:420px;border:none;display:block"></iframe>`);
-  showActions(`https://pdisk.me/${id}`, false);
-  msg('PDisk video loaded!', 's');
+  setPlayer(`<iframe src="https://pdisk.me/embed/${id}" allow="autoplay;fullscreen" allowfullscreen
+    style="width:100%;height:440px;border:none;display:block;background:#000"></iframe>`);
+  setActions(null, url);
+  setMsg('PDisk loaded! ✅','s');
 }
 
-// ─── GOOGLE DRIVE ─────────────────────────────────────────────────────
-function playGdrive(url) {
-  const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-  if (!m) { msg('Invalid Google Drive URL. Must contain /d/FILE_ID/', 'e'); return; }
+// ── 4. GOOGLE DRIVE ───────────────────────────────────────────────────
+// Google Drive preview API = CORS-friendly iframe
+function doGdrive(url) {
+  const m = url.match(/\/d\/([A-Za-z0-9_-]+)/);
+  if (!m) { setMsg('Invalid Google Drive URL — must contain /d/FILE_ID/','e'); return; }
   const id = m[1];
   setPlayer(`<iframe src="https://drive.google.com/file/d/${id}/preview"
-    allow="autoplay;fullscreen" allowfullscreen
-    style="width:100%;height:430px;border:none;display:block"></iframe>`);
-  const dlUrl = `https://drive.google.com/uc?export=download&id=${id}`;
-  showActions(dlUrl, true);
-  msg('Google Drive video loaded!', 's');
+    allow="autoplay; fullscreen" allowfullscreen
+    style="width:100%;height:440px;border:none;display:block;background:#000"></iframe>`);
+  const dl = `https://drive.google.com/uc?export=download&id=${id}`;
+  setActions(dl, dl);
+  setMsg('Google Drive video loaded! ✅','s');
 }
 
-// ─── PIXELDRAIN ───────────────────────────────────────────────────────
-function playPixeldrain(url) {
-  const m = url.match(/pixeldrain\.com\/(?:u|l)\/([a-zA-Z0-9]+)/);
-  if (!m) { msg('Invalid Pixeldrain URL.', 'e'); return; }
+// ── 5. PIXELDRAIN ─────────────────────────────────────────────────────
+// Pixeldrain CDN = CORS: * — works directly from browser, no server needed
+function doPixeldrain(url) {
+  const m = url.match(/pixeldrain\.com\/(?:u|l)\/([A-Za-z0-9]+)/);
+  if (!m) { setMsg('Invalid Pixeldrain URL.','e'); return; }
   const id = m[1];
   const src = `https://pixeldrain.com/api/file/${id}`;
-  const apiInfo = `https://pixeldrain.com/api/file/${id}/info`;
+  openPW(); setLoad(true,'Fetching Pixeldrain file info...','CDN API');
 
-  showWrap(); setLoad(true, 'Fetching Pixeldrain file...', 'Using Pixeldrain CDN API');
-
-  // Get file info first
-  fetch(apiInfo, { signal: AbortSignal.timeout(8000) })
-    .then(r => r.json())
+  fetch(`https://pixeldrain.com/api/file/${id}/info`, { signal:AbortSignal.timeout(8000) })
+    .then(r=>r.json())
     .then(d => {
       setLoad(false); hideMsg();
-      showInfo(d?.name || 'Pixeldrain Video', formatSize(d?.size), null);
-      playVideo(src);
-      showActions(src, true);
-      msg('Pixeldrain video loaded!', 's');
+      setInfo(d?.name||'Pixeldrain Video', fmtSz(d?.size), null);
+      playV(src, d?.mime_type||'video/mp4');
+      setActions(src, src);
+      setMsg('Pixeldrain video loaded! ✅','s');
     })
     .catch(() => {
       setLoad(false); hideMsg();
-      playVideo(src);
-      showActions(src, true);
-      msg('Pixeldrain video loaded!', 's');
+      playV(src);
+      setActions(src, src);
+      setMsg('Pixeldrain video loaded! ✅','s');
     });
 }
 
-// ─── STREAMTAPE ───────────────────────────────────────────────────────
-function playStreamtape(url) {
-  const m = url.match(/streamtape\.(?:com|net)\/(?:v|e)\/([a-zA-Z0-9]+)/);
-  if (!m) { msg('Invalid Streamtape URL.', 'e'); return; }
+// ── 6. STREAMTAPE ─────────────────────────────────────────────────────
+// Streamtape embed iframe works fine cross-origin
+function doStreamtape(url) {
+  const m = url.match(/streamtape\.(?:com|net)\/(?:v|e)\/([A-Za-z0-9]+)/);
+  if (!m) { setMsg('Invalid Streamtape URL.','e'); return; }
   const id = m[1];
-  // Use official embed — most reliable for Streamtape
   setPlayer(`<iframe src="https://streamtape.com/e/${id}"
-    allow="autoplay;fullscreen" allowfullscreen
-    style="width:100%;height:430px;border:none;display:block"></iframe>`);
-  showActions(`https://streamtape.com/v/${id}`, false);
-  msg('Streamtape video loaded!', 's');
+    allow="autoplay; fullscreen" allowfullscreen
+    style="width:100%;height:440px;border:none;display:block;background:#000"></iframe>`);
+  setActions(null, `https://streamtape.com/v/${id}`);
+  setMsg('Streamtape video loaded! ✅','s');
 }
 
-// ─── GOFILE ───────────────────────────────────────────────────────────
-async function playGofile(url) {
-  const m = url.match(/gofile\.io\/d\/([a-zA-Z0-9]+)/);
-  if (!m) { msg('Invalid Gofile URL.', 'e'); return; }
-  const contentId = m[1];
-
-  showWrap(); setLoad(true, 'Calling Gofile API...', 'Getting guest token');
-  msg('Fetching Gofile video via official API...', 'i');
+// ── 7. GOFILE ─────────────────────────────────────────────────────────
+// Gofile API returns Access-Control-Allow-Origin: * — works from browser
+async function doGofile(url) {
+  const m = url.match(/gofile\.io\/d\/([A-Za-z0-9]+)/);
+  if (!m) { setMsg('Invalid Gofile URL.','e'); return; }
+  const id = m[1];
+  openPW(); setLoad(true,'Calling Gofile API...','Getting content token');
+  setMsg('Fetching via official Gofile API...','i');
 
   try {
-    // Step 1: Guest token (Gofile API supports CORS)
+    // Step 1: guest token
     let token = null;
     try {
-      const tr = await fetch('https://api.gofile.io/accounts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        signal: AbortSignal.timeout(8000),
+      const tr = await fetch('https://api.gofile.io/accounts',{
+        method:'POST', headers:{'Content-Type':'application/json'},
+        signal:AbortSignal.timeout(8000)
       });
       const td = await tr.json();
       token = td?.data?.token;
-    } catch(e) {}
+    } catch(e){}
 
-    // Step 2: Get content
-    setLoad(true, 'Fetching file list...', 'Getting content info');
-    const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
-    headers['Cookie'] = token ? `accountToken=${token}` : '';
-
-    const cr = await fetch(`https://api.gofile.io/contents/${contentId}?wt=4fd6sg89d7s6&cache=true`, {
-      headers,
-      signal: AbortSignal.timeout(10000),
+    // Step 2: fetch content
+    setLoad(true,'Fetching content info...','Gofile API');
+    const h = token ? {Authorization:`Bearer ${token}`,Cookie:`accountToken=${token}`} : {};
+    const cr = await fetch(`https://api.gofile.io/contents/${id}?wt=4fd6sg89d7s6&cache=true`, {
+      headers:h, signal:AbortSignal.timeout(12000)
     });
     const cd = await cr.json();
+    if (cd.status !== 'ok') throw new Error(cd.status||'Not accessible');
 
-    if (cd.status !== 'ok') throw new Error('Content not found or private');
-
-    const children = Object.values(cd.data?.children || {});
-    const files = children.filter(f => f.type === 'file');
-    if (!files.length) throw new Error('No files found');
-
-    const vid = files.find(f => /\.(mp4|webm|mkv|mov|avi|m3u8)/i.test(f.name||'')) || files[0];
-    if (!vid?.link) throw new Error('No playable link');
+    // Find video file
+    const files = Object.values(cd.data?.children||{}).filter(f=>f.type==='file');
+    if (!files.length) throw new Error('No files in this folder');
+    const vid = files.find(f=>/\.(mp4|webm|mkv|mov|avi|m3u8)/i.test(f.name||'')) || files[0];
+    if (!vid?.link) throw new Error('No playable link found');
 
     setLoad(false); hideMsg();
-    showInfo(vid.name || 'Gofile Video', formatSize(vid.size), null);
-    playVideo(vid.link);
-    showActions(vid.link, true);
-    msg('Gofile video loaded! 🎉', 's');
+    setInfo(vid.name||'Gofile Video', fmtSz(vid.size), null);
+    playV(vid.link, vid.mimetype||'video/mp4');
+    setActions(vid.link, vid.link);
+    setMsg('Gofile video loaded! 🎉','s');
 
   } catch(e) {
     setLoad(false);
-    document.getElementById('pvwrap').className = 'pvwrap';
-    msg(`<strong>Gofile error:</strong> ${e.message || 'Could not load'}<br>The content may be private, expired, or require a password.`, 'w');
+    document.getElementById('pw').className='pw';
+    setMsg(`<strong>Gofile error:</strong> ${e.message}<br>Content may be private, password-protected, or expired.`,'w');
   }
 }
 
-// ─── YOUTUBE ──────────────────────────────────────────────────────────
-function playYoutube(url) {
-  const m = url.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([a-zA-Z0-9_-]{11})/);
-  if (!m) { msg('Invalid YouTube URL.', 'e'); return; }
+// ── 8. YOUTUBE ────────────────────────────────────────────────────────
+function doYoutube(url) {
+  const m = url.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([A-Za-z0-9_-]{11})/);
+  if (!m) { setMsg('Invalid YouTube URL.','e'); return; }
   setPlayer(`<iframe src="https://www.youtube.com/embed/${m[1]}?autoplay=1&rel=0&modestbranding=1"
-    allow="autoplay;fullscreen;picture-in-picture" allowfullscreen
-    style="width:100%;height:430px;border:none;display:block"></iframe>`);
-  showActions(`https://www.youtube.com/watch?v=${m[1]}`, false);
-  msg('YouTube video loaded!', 's');
+    allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+    style="width:100%;height:440px;border:none;display:block"></iframe>`);
+  setActions(null, `https://www.youtube.com/watch?v=${m[1]}`);
+  setMsg('YouTube video loaded! ✅','s');
 }
 
-// ─── DIRECT VIDEO ─────────────────────────────────────────────────────
-function playDirect(url) {
-  playVideo(url);
-  showActions(url, true);
-  msg('Video loaded! Press play to watch.', 's');
+// ── 9. DIRECT VIDEO ───────────────────────────────────────────────────
+function doDirect(url) {
+  setPlayer(`<video controls autoplay playsinline style="width:100%;max-height:500px;background:#000;display:block">
+    <source src="${esc(url)}" type="video/mp4">
+    <source src="${esc(url)}">
+    <p style="color:#fff;padding:20px;text-align:center">
+      Cannot play inline. <a href="${esc(url)}" target="_blank" style="color:var(--acc)">Click here to open ↗</a>
+    </p>
+  </video>`);
+  setActions(url, url);
+  setMsg('Video loaded! ✅','s');
 }
 
-// ─── MAIN HANDLER ─────────────────────────────────────────────────────
+// ── MAIN ──────────────────────────────────────────────────────────────
 async function go() {
-  const url = document.getElementById('urlin').value.trim();
-  if (!url) { msg('Please paste a video link first.', 'e'); return; }
-  if (!url.startsWith('http')) { msg('URL must start with http:// or https://', 'e'); return; }
+  const url = $inp.value.trim();
+  if (!url) { setMsg('Please paste a video link first.','e'); return; }
+  if (!url.startsWith('http')) { setMsg('URL must start with http:// or https://','e'); return; }
 
-  hideMsg();
-  setBtnLoading(true);
+  hideMsg(); setBusy(true);
+  if (_HLS){ _HLS.destroy(); _HLS=null; }
 
-  // Reset state
-  if (_hlsInstance) { _hlsInstance.destroy(); _hlsInstance = null; }
-  document.getElementById('pvwrap').className = 'pvwrap';
-  document.getElementById('pvwrap').innerHTML = `<div class="loadbox on" id="loadbox">
-    <div class="lring"></div>
-    <div class="ltxt" id="ltxt">Detecting platform...</div>
-    <div class="lsub" id="lsub">Please wait</div>
-  </div>`;
-  document.getElementById('arow').className = 'arow';
-  document.getElementById('vinfo').className = 'vinfo';
-  _directUrl = '';
+  // reset player
+  const pw = document.getElementById('pw');
+  pw.className='pw';
+  pw.innerHTML=`<div class="lb on" id="lb"><div class="lr"></div><div class="lt" id="lt">Detecting platform...</div><div class="ls" id="ls">Please wait</div></div>`;
+  document.getElementById('arow').className='arow';
+  document.getElementById('vinfo').className='vinfo';
+  _DL='';
 
-  const platform = detect(url);
-
+  const p = detect(url);
   try {
-    switch(platform) {
-      case 'terabox':    await playTerabox(url); break;
-      case 'mdisk':      await playMdisk(url); break;
-      case 'pdisk':      await playPdisk(url); break;
-      case 'gdrive':     playGdrive(url); break;
-      case 'pixeldrain': playPixeldrain(url); break;
-      case 'streamtape': playStreamtape(url); break;
-      case 'gofile':     await playGofile(url); break;
-      case 'youtube':    playYoutube(url); break;
-      case 'direct':     playDirect(url); break;
+    switch(p) {
+      case 'terabox':    await doTera(url); break;
+      case 'terashare':  await doTera(url); break;
+      case 'mdisk':      await doMdisk(url); break;
+      case 'pdisk':      await doPdisk(url); break;
+      case 'gdrive':     doGdrive(url); break;
+      case 'pixeldrain': doPixeldrain(url); break;
+      case 'streamtape': doStreamtape(url); break;
+      case 'gofile':     await doGofile(url); break;
+      case 'youtube':    doYoutube(url); break;
+      case 'direct':     doDirect(url); break;
       default:
-        // Unknown platform — try as direct video link
-        msg('Platform not recognized. Trying as direct video...', 'w');
-        playDirect(url);
+        setMsg('Platform not recognized — trying as direct video link...','w');
+        doDirect(url);
     }
   } catch(err) {
-    document.getElementById('pvwrap').className = 'pvwrap';
-    msg('Unexpected error. Check the link and try again.', 'e');
+    pw.className='pw';
+    setMsg('Unexpected error: ' + err.message,'e');
     console.error(err);
   }
-
-  setBtnLoading(false);
-}
-
-// ─── UTILS ────────────────────────────────────────────────────────────
-function formatSize(bytes) {
-  if (!bytes) return '';
-  const mb = bytes / (1024 * 1024);
-  return mb > 1024 ? `${(mb/1024).toFixed(1)} GB` : `${mb.toFixed(1)} MB`;
+  setBusy(false);
 }
 
 function faq(btn) {
   const item = btn.closest('.faqitem');
-  const open = item.classList.contains('op');
-  document.querySelectorAll('.faqitem').forEach(i => i.classList.remove('op'));
-  if (!open) item.classList.add('op');
+  const was = item.classList.contains('op');
+  document.querySelectorAll('.faqitem').forEach(i=>i.classList.remove('op'));
+  if(!was) item.classList.add('op');
 }
 </script>
 </body>
